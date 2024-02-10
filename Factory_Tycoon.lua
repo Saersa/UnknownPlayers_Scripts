@@ -1,7 +1,6 @@
-
-
 -----------//  LOGIC  \\-----------
 
+local Playerhead = game.Players.LocalPlayer.Character.Head
 local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
 local tycoon = nil
@@ -64,7 +63,7 @@ local Window = ArrayField:CreateWindow({
 
       while getgenv().AutoCollect == true do
          wait()
-         firetouchinterest(tycoon.Build.Collect.Part.TouchInterest)
+         firetouchinterest(Playerhead, game:GetService("Workspace").Tycoons.Green.Build.Collect.Part.TouchInterest,0)
       end
    end,
 })
