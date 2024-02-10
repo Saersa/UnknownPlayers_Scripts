@@ -38,7 +38,7 @@ local Window = ArrayField:CreateWindow({
  local Main = Window:CreateTab("Main", 7539983780) -- Title, Image
  local PlayerOptions = Window:CreateTab("Player", 16313704996) -- Title, Image
 
- 
+
  local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.Name)
  local Label = Main:CreateLabel("UserID: "..game.Players.LocalPlayer.UserId)
  
@@ -52,17 +52,28 @@ local Window = ArrayField:CreateWindow({
     end,
  })
 
- local WSChanger = PlayerOptions:CreateSlider({
-    Name = "Walkspeed",
-    Range = {16, 500},
-    Increment = 1,
-    Suffix = "WalkSpeed",
-    CurrentValue = 16,
-    Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-    Callback = function(Value)
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+ local WSChanger = PlayerOptions:CreateInput({
+    Name = "Input Example",
+    PlaceholderText = "Input Placeholder",
+    NumbersOnly = true, -- If the user can only type numbers. Remove or set to false if none.
+    CharacterLimit = 15, --max character limit. Remove or set to false
+    OnEnter = true, -- Will callback only if the user pressed ENTER while being focused on the the box.
+    RemoveTextAfterFocusLost = false, -- Speaks for itself.
+    Callback = function(Text)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Text
     end,
  })
 
 
 
+
+
+
+
+
+
+
+
+
+
+ArrayField:LoadConfiguration()
