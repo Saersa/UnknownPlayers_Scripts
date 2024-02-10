@@ -15,7 +15,6 @@ for i,v in pairs(game.Players:GetChildren()) do
 end
 
 
-
 game.Players.PlayerAdded:Connect(function(plr)
     local userId = plr.UserId
     local thumbType = Enum.ThumbnailType.AvatarBust
