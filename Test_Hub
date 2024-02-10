@@ -36,13 +36,14 @@ local Window = ArrayField:CreateWindow({
 
 
  local Main = Window:CreateTab("Main", 7539983780) -- Title, Image
- local PlayerOptions = Window:CreateTab("Player", 16313704996) -- Title, Image
+ local PlayerOptions = Window:CreateTab("Player", 16313704996) 
+ local BadPC = Window:CreateTab("Bad Device", 16313704996) 
 
-
+--Main
  local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.Name)
  local Label = Main:CreateLabel("UserID: "..game.Players.LocalPlayer.UserId)
  
-
+--PlayerOptions
  
  local Kicker = PlayerOptions:CreateButton({
     Name = "Server Hopper",
@@ -89,9 +90,101 @@ local Window = ArrayField:CreateWindow({
 
 
 
+--Bad PC
 
+local TextureRemover = BadPC:CreateButton({
+    Name = "Remove all Textures",
+    Interact = 'Click',
+    Callback = function()
+        ArrayField:Notify({
+            Title = "Notification!",
+            Content = "Removing all textures, May give bit lag",
+            Duration = 5,
+            Image = 4483362458,
+            Actions = { -- Notification Buttons
+               Ignore = {
+                  Name = "Okay!",
+                  Callback = function()
+                  print("The user tapped Okay!")
+               end
+            },
+          },
+         })
 
+         wait(3)
 
+         local ToDisable = {
+            Textures = true,
+            VisualEffects = true,
+            Parts = true,
+            Particles = true,
+            Sky = true
+        }
+        
+        local ToEnable = {
+            FullBright = false
+        }
+        
+        local Stuff = {}
+        
+        for _, v in next, game:GetDescendants() do
+            if ToDisable.Parts then
+                if v:IsA("Part") or v:IsA("Union") or v:IsA("BasePart") then
+                    v.Material = Enum.Material.SmoothPlastic
+                    table.insert(Stuff, 1, v)
+                end
+            end
+            
+            if ToDisable.Particles then
+                if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Explosion") or v:IsA("Sparkles") or v:IsA("Fire") then
+                    v.Enabled = false
+                    table.insert(Stuff, 1, v)
+                end
+            end
+            
+            if ToDisable.VisualEffects then
+                if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("DepthOfFieldEffect") or v:IsA("SunRaysEffect") then
+                    v.Enabled = false
+                    table.insert(Stuff, 1, v)
+                end
+            end
+            
+            if ToDisable.Textures then
+                if v:IsA("Decal") or v:IsA("Texture") then
+                    v.Texture = ""
+                    table.insert(Stuff, 1, v)
+                end
+            end
+            
+            if ToDisable.Sky then
+                if v:IsA("Sky") then
+                    v.Parent = nil
+                    table.insert(Stuff, 1, v)
+                end
+            end
+        end
+        
+        
+        for i, v in next, ToDisable do
+            print(tostring(i)..": "..tostring(v))
+        end
+        
+        if ToEnable.FullBright then
+            local Lighting = game:GetService("Lighting")
+            
+            Lighting.FogColor = Color3.fromRGB(255, 255, 255)
+            Lighting.FogEnd = math.huge
+            Lighting.FogStart = math.huge
+            Lighting.Ambient = Color3.fromRGB(255, 255, 255)
+            Lighting.Brightness = 5
+            Lighting.ColorShift_Bottom = Color3.fromRGB(255, 255, 255)
+            Lighting.ColorShift_Top = Color3.fromRGB(255, 255, 255)
+            Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
+            Lighting.Outlines = true
+        end
+
+    end,
+ })
 
 
 
