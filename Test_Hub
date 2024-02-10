@@ -21,13 +21,14 @@ game.Players.PlayerAdded:Connect(function(plr)
     local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
     playeramount += 1
-
+    if isReady then
     game.StarterGui:SetCore("SendNotification", {
         Title = "Player Joined",
         Text = plr.Name,
         Image = content,
         Duration = 3,
             })
+    end
 end)
 
 game.Players.PlayerRemoving:Connect(function(plr)
@@ -38,13 +39,14 @@ game.Players.PlayerRemoving:Connect(function(plr)
     local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
     playeramount =- 1
-
+    if isReady then
     game.StarterGui:SetCore("SendNotification", {
         Title = "Player Left",
         Text = plr.Name,
         Image = content,
         Duration = 3,
             })
+     end
 end)
 
 
