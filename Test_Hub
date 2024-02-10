@@ -46,7 +46,22 @@ local Window = ArrayField:CreateWindow({
 
  local Section = Main:CreateSection("Server Information",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
  
- local Label = Main:CreateLabel("Country Code: "..game.LocalizationService:GetCountryRegionForPlayerAsync(game.Players.LocalPlayer))
+
+local playeramount = 0
+
+local Button = Main:CreateButton({
+    Name = "Update PlayerCount",
+    Interact = 'Click',
+    Callback = function()
+        playeramount = 0
+    for i,v in pairs(game.Players:GetChildren()) do
+        playeramount += 1
+    end
+    
+    end,
+ })
+
+ local Label = Main:CreateLabel("Amount of Players: "..playeramount)
 
  
 --PlayerOptions
