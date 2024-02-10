@@ -23,7 +23,7 @@ game.Players.PlayerAdded:Connect(function(plr)
     playeramount += 1
 
     game.StarterGui:SetCore("SendNotification", {
-        Title = "Player Left",
+        Title = "Player Joined",
         Text = plr.Name,
         Image = content,
         Duration = 3,
