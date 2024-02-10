@@ -71,7 +71,7 @@ local Button = Main:CreateButton({
 
 
  
- local Label = Main:CreateLabel("Amount of Players: "..playeramount)
+ local plrAmount = Main:CreateLabel("Amount of Players: "..playeramount)
 
  local Button = Main:CreateButton({
     Name = "See PlayerCount",
@@ -92,7 +92,7 @@ local Button = Main:CreateButton({
             },
           },
          })
-    
+         plrAmount:Set(playeramount)
     end,
  })
  
