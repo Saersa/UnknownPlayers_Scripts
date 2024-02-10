@@ -1,4 +1,56 @@
+
+-----------//  LOGIC  \\-----------
+
+
+
+
+
 local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+
+local playeramount = 0
+
+for i,v in pairs(game.Players:GetChildren()) do
+    playeramount += 1
+    print(v.Name.." is player "..playeramount)
+end
+
+game.Players.PlayerAdded:Connect(function(plr)
+    local userId = plr.UserId
+    local thumbType = Enum.ThumbnailType.AvatarBust
+    local thumbSize = Enum.ThumbnailSize.Size420x420
+    local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+    playeramount += 1
+
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Player Left",
+        Text = plr.Name,
+        Image = content,
+        Duration = 3,
+            })
+end)
+
+game.Players.PlayerRemoving:Connect(function(plr)
+
+    local userId = plr.UserId
+    local thumbType = Enum.ThumbnailType.AvatarBust
+    local thumbSize = Enum.ThumbnailSize.Size420x420
+    local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+    playeramount =- 1
+
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Player Left",
+        Text = plr.Name,
+        Image = content,
+        Duration = 3,
+            })
+end)
+
+
+
+-----------//  GUI  \\-----------
+
 local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source.lua'))()
 local Window = ArrayField:CreateWindow({
     Name = gamename, -- The ScriptName
@@ -39,7 +91,7 @@ local Window = ArrayField:CreateWindow({
  local PlayerOptions = Window:CreateTab("Player", 16313704996) 
  local BadPC = Window:CreateTab("Bad Device", 16313704996) 
 
---Main
+-----------//  Main  \\-----------
 
 local Section = Main:CreateSection("Player Information",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
  local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.Name)
@@ -48,14 +100,6 @@ local Section = Main:CreateSection("Player Information",false) -- The 2nd argume
 
  local Section = Main:CreateSection("Server Information",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
  
-
-local playeramount = 0
-
-for i,v in pairs(game.Players:GetChildren()) do
-    task.wait(0.01)
-    playeramount += 1
-    print(v.Name.." is player "..playeramount)
-end
 
 
 local plrAmount = Main:CreateLabel("Amount of Players: "..playeramount)
@@ -77,7 +121,7 @@ local Button = Main:CreateButton({
  })
 
  
---PlayerOptions
+-----------//  PlayerOptions  \\-----------
  
  local Kicker = PlayerOptions:CreateButton({
     Name = "Server Hopper",
@@ -124,7 +168,8 @@ local Button = Main:CreateButton({
 
 
 
---Bad PC
+
+-----------//  Bad PC  \\-----------
 
 local TextureRemover = BadPC:CreateButton({
     Name = "Remove all Textures",
