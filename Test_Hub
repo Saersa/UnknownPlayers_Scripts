@@ -16,7 +16,42 @@ end
 
 
 
+game.Players.PlayerAdded:Connect(function(plr)
+    local userId = plr.UserId
+    local thumbType = Enum.ThumbnailType.AvatarBust
+    local thumbSize = Enum.ThumbnailSize.Size420x420
+    local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
+    playeramount += 1
+    if isReady then
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Player Joined",
+        Text = plr.Name,
+        Image = content,
+        Duration = 3,
+            })
+    end
+    
+end)
+
+game.Players.PlayerRemoving:Connect(function(plr)
+
+    local userId = plr.UserId
+    local thumbType = Enum.ThumbnailType.AvatarBust
+    local thumbSize = Enum.ThumbnailSize.Size420x420
+    local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
+
+    playeramount =- 1
+    if isReady then
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Player Left",
+        Text = plr.Name,
+        Image = content,
+        Duration = 3,
+            })
+     end
+     
+end)
 
 -----------//  GUI  \\-----------
 
@@ -110,44 +145,7 @@ local Button = Main:CreateButton({
  })
 
 
- game.Players.PlayerAdded:Connect(function(plr)
-    local userId = plr.UserId
-    local thumbType = Enum.ThumbnailType.AvatarBust
-    local thumbSize = Enum.ThumbnailSize.Size420x420
-    local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
-    playeramount += 1
-    if isReady then
-    game.StarterGui:SetCore("SendNotification", {
-        Title = "Player Joined",
-        Text = plr.Name,
-        Image = content,
-        Duration = 3,
-            })
-    end
-    
-    plrAmount:Set("Amount of Players: "..playeramount)
-end)
-
-game.Players.PlayerRemoving:Connect(function(plr)
-
-    local userId = plr.UserId
-    local thumbType = Enum.ThumbnailType.AvatarBust
-    local thumbSize = Enum.ThumbnailSize.Size420x420
-    local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
-
-    playeramount =- 1
-    if isReady then
-    game.StarterGui:SetCore("SendNotification", {
-        Title = "Player Left",
-        Text = plr.Name,
-        Image = content,
-        Duration = 3,
-            })
-     end
-     
-     plrAmount:Set("Amount of Players: "..playeramount)
-end)
  
 -----------//  PlayerOptions  \\-----------
  
@@ -308,3 +306,14 @@ local TextureRemover = BadPC:CreateButton({
 
 
 ArrayField:LoadConfiguration()
+
+
+
+
+
+
+
+while true do
+   wait(1)
+    plrAmount:Set("Amount of Players: "..playeramount) 
+end
