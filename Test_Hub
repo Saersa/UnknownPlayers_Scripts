@@ -45,10 +45,24 @@ local Window = ArrayField:CreateWindow({
 
  
  local Kicker = PlayerOptions:CreateButton({
-    Name = "Kick",
+    Name = "Server Hopper",
     Interact = 'Click',
     Callback = function()
-        game.Players.LocalPlayer:Kick("Kicked By Player")
+        Window:Prompt({
+            Title = 'Are you Sure?',
+            SubTitle = 'server hop',
+            Content = 'Are you sure you want to server hop',
+            Actions = {
+                Accept = {
+                    Name = 'Accept',
+                    Callback = function()
+                        local ts = game:GetService("TeleportService")
+                        local p = game:GetService("Players").LocalPlayer
+                        ts:Teleport(game.PlaceId, p)
+                    end,
+                }
+            }
+        })
     end,
  })
 
