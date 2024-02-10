@@ -60,6 +60,13 @@ local Window = ArrayField:CreateWindow({
                         local p = game:GetService("Players").LocalPlayer
                         ts:Teleport(game.PlaceId, p)
                     end,
+                },
+                Decline = {
+                    Name= "Decline",
+                    Callback = function()
+                        print("Declined")
+
+                    end,
                 }
             }
         })
@@ -67,8 +74,8 @@ local Window = ArrayField:CreateWindow({
  })
 
  local WSChanger = PlayerOptions:CreateInput({
-    Name = "Input Example",
-    PlaceholderText = "Input Placeholder",
+    Name = "Input Walkspeed",
+    PlaceholderText = "Walkspeed",
     NumbersOnly = true, -- If the user can only type numbers. Remove or set to false if none.
     CharacterLimit = 15, --max character limit. Remove or set to false
     OnEnter = true, -- Will callback only if the user pressed ENTER while being focused on the the box.
