@@ -33,10 +33,27 @@ local Window = ArrayField:CreateWindow({
        Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
     }
  })
- local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
- local Button = Tab:CreateButton({
-    Name = "Button Example",
+ local PlayerOptions = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
+ 
+ local Kicker = PlayerOptions:CreateButton({
+    Name = "Kick",
     Interact = 'Click',
     Callback = function()
+        game.Players.LocalPlayer:Kick("Kicked By Player")
     end,
  })
+
+ local WSChanger = PlayerOptions:CreateSlider({
+    Name = "Walkspeed",
+    Range = {16, 100},
+    Increment = 1,
+    Suffix = "Bananas",
+    CurrentValue = 16,
+    Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    end,
+ })
+
+
+
