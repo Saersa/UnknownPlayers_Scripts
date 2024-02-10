@@ -135,7 +135,7 @@ local Button = Main:CreateButton({
           },
          })
     end
-        plrAmount:Set(playeramount)
+        plrAmount:Set("Amount of Players: "..playeramount)
     end,
  })
 
