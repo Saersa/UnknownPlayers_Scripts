@@ -74,7 +74,7 @@ local Button = Main:CreateButton({
         playeramount = 0
         ArrayField:Notify({
             Title = "Notification Title",
-            Content = "Notification Content",
+            Content = playeramount,
             Duration = 6.5,
             Image = 4483362458,
             Actions = { -- Notification Buttons
