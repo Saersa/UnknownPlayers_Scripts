@@ -40,6 +40,8 @@ local Window = ArrayField:CreateWindow({
  local BadPC = Window:CreateTab("Bad Device", 16313704996) 
 
 --Main
+
+local Section = Main:CreateSection("Player Information",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
  local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.Name)
  local Label = Main:CreateLabel("UserID: "..game.Players.LocalPlayer.UserId)
  local Label = Main:CreateLabel("Country Code: "..game.LocalizationService:GetCountryRegionForPlayerAsync(game.Players.LocalPlayer))
@@ -61,8 +63,32 @@ local Button = Main:CreateButton({
     end,
  })
 
+
+ 
  local Label = Main:CreateLabel("Amount of Players: "..playeramount)
 
+ local Button = Main:CreateButton({
+    Name = "See PlayerCount",
+    Interact = 'Click',
+    Callback = function()
+        playeramount = 0
+        ArrayField:Notify({
+            Title = "Notification Title",
+            Content = "Notification Content",
+            Duration = 6.5,
+            Image = 4483362458,
+            Actions = { -- Notification Buttons
+               Ignore = {
+                  Name = "Okay!",
+                  Callback = function()
+                  print(playeramount)
+               end
+            },
+          },
+         })
+    
+    end,
+ })
  
 --PlayerOptions
  
