@@ -57,6 +57,9 @@ for i,v in pairs(game.Players:GetChildren()) do
 end
 
 
+local plrAmount = Main:CreateLabel("Amount of Players: "..playeramount)
+
+
 local Button = Main:CreateButton({
     Name = "Update PlayerCount",
     Interact = 'Click',
@@ -66,12 +69,13 @@ local Button = Main:CreateButton({
             playeramount += 1
             print(v.Name.." is player "..playeramount)
         end
+        
+        plrAmount:Set(playeramount)
     end,
  })
 
 
  
- local plrAmount = Main:CreateLabel("Amount of Players: "..playeramount)
 
  local Button = Main:CreateButton({
     Name = "See PlayerCount",
@@ -92,7 +96,6 @@ local Button = Main:CreateButton({
             },
           },
          })
-         plrAmount:Set(playeramount)
     end,
  })
  
