@@ -35,12 +35,14 @@ local Window = ArrayField:CreateWindow({
  })
 
 
- local Main = Window:CreateTab("Main", 4483362458) -- Title, Image
+ local Main = Window:CreateTab("Main", 7539983780) -- Title, Image
+ local PlayerOptions = Window:CreateTab("Player", 16313704996) -- Title, Image
+
+ 
  local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.Name)
  local Label = Main:CreateLabel("UserID: "..game.Players.LocalPlayer.UserId)
  
 
- local PlayerOptions = Window:CreateTab("Player", 4483362458) -- Title, Image
  
  local Kicker = PlayerOptions:CreateButton({
     Name = "Kick",
