@@ -115,7 +115,7 @@ local Button = Main:CreateButton({
         playeramount = 0
         updatePlayercount = true
         for i,v in pairs(game.Players:GetChildren()) do
-            task.wait(0.01)
+            task.wait()
             playeramount += 1
             print(v.Name.." is player "..playeramount)
         end
@@ -144,7 +144,7 @@ local Button = Main:CreateButton({
  
 -----------//  PlayerOptions  \\-----------
  
- local Kicker = PlayerOptions:CreateButton({
+ local servHopper = PlayerOptions:CreateButton({
     Name = "Server Hopper",
     Interact = 'Click',
     Callback = function()
