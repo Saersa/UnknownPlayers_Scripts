@@ -76,30 +76,6 @@ local Button = Main:CreateButton({
     end,
  })
 
-
- 
-
- local Button = Main:CreateButton({
-    Name = "See PlayerCount",
-    Interact = 'Click',
-    Callback = function()
-        playeramount = 0
-        ArrayField:Notify({
-            Title = "Notification Title",
-            Content = playeramount,
-            Duration = 6.5,
-            Image = 4483362458,
-            Actions = { -- Notification Buttons
-               Ignore = {
-                  Name = "Okay!",
-                  Callback = function()
-                  print(playeramount)
-               end
-            },
-          },
-         })
-    end,
- })
  
 --PlayerOptions
  
