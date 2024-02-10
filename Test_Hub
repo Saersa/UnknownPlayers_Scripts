@@ -62,12 +62,12 @@ local Window = ArrayField:CreateWindow({
 
 -----------//  Main  \\-----------
 
-local Section = Main:CreateSection("Player Information",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
+local Section = Main:CreateSection("Player Information",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
  local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.Name)
  local Label = Main:CreateLabel("UserID: "..game.Players.LocalPlayer.UserId)
  local Label = Main:CreateLabel("Country Code: "..game.LocalizationService:GetCountryRegionForPlayerAsync(game.Players.LocalPlayer))
 
- local Section = Main:CreateSection("Server Information",false) -- The 2nd argument is to tell if its only a Title and doesnt contain element
+ local Section = Main:CreateSection("Server Information",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
  
 
 
