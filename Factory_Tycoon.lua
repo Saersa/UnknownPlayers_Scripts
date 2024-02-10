@@ -63,7 +63,7 @@ local Window = ArrayField:CreateWindow({
 
       while getgenv().AutoCollect == true do
          wait()
-         firetouchinterest(Playerhead, game:GetService("Workspace").Tycoons.Green.Build.Collect.Part.TouchInterest,0)
+         firetouchinterest(Playerhead, tycoon.Build.Collect.Part.TouchInterest,0)
       end
    end,
 })
