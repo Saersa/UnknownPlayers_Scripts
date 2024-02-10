@@ -3,7 +3,7 @@
 
 
 
-
+local updatePlayercount = false
 
 local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 
@@ -109,13 +109,32 @@ local Button = Main:CreateButton({
     Name = "Update PlayerCount",
     Interact = 'Click',
     Callback = function()
+        if not updatePlayercount then
         playeramount = 0
+        updatePlayercount = true
         for i,v in pairs(game.Players:GetChildren()) do
             task.wait(0.01)
             playeramount += 1
             print(v.Name.." is player "..playeramount)
         end
-        
+        wait(2)
+        updatePlayercount = false
+    else
+        ArrayField:Notify({
+            Title = "Please wait a bit ",
+            Content = "By spamming this, you will lag very bad",
+            Duration = 6.5,
+            Image = 4483362458,
+            Actions = { -- Notification Buttons
+               Ignore = {
+                  Name = "Okay!",
+                  Callback = function()
+                  print("The user tapped Okay!")
+               end
+            },
+          },
+         })
+    end
         plrAmount:Set(playeramount)
     end,
  })
