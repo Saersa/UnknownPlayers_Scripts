@@ -3,7 +3,7 @@ local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI
 local Window = ArrayField:CreateWindow({
     Name = gamename, -- The ScriptName
     LoadingTitle = gamename, -- The loading title for the name. Keep it gamename
-    LoadingSubtitle = "by Doran",
+    LoadingSubtitle = "Universal Script by Doran",
     ConfigurationSaving = {
        Enabled = true,
        FolderName = "Dorans ScriptHub", -- Create a custom folder for your hub/game
@@ -33,7 +33,14 @@ local Window = ArrayField:CreateWindow({
        Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
     }
  })
- local PlayerOptions = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
+
+
+ local Main = Window:CreateTab("Main", 4483362458) -- Title, Image
+ local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.Name)
+ local Label = Main:CreateLabel("UserID: "..game.Players.LocalPlayer.UserId)
+ 
+
+ local PlayerOptions = Window:CreateTab("Player", 4483362458) -- Title, Image
  
  local Kicker = PlayerOptions:CreateButton({
     Name = "Kick",
@@ -45,9 +52,9 @@ local Window = ArrayField:CreateWindow({
 
  local WSChanger = PlayerOptions:CreateSlider({
     Name = "Walkspeed",
-    Range = {16, 100},
+    Range = {16, 500},
     Increment = 1,
-    Suffix = "Bananas",
+    Suffix = "WalkSpeed",
     CurrentValue = 16,
     Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
     Callback = function(Value)
