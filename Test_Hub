@@ -186,7 +186,17 @@ local TextureRemover = BadPC:CreateButton({
     end,
  })
 
-
+ local Input = BadPC:CreateInput({
+    Name = "Set FPS",
+    PlaceholderText = "Input Amount",
+    NumbersOnly = true, -- If the user can only type numbers. Remove or set to false if none.
+    CharacterLimit = 15, --max character limit. Remove or set to false
+    OnEnter = true, -- Will callback only if the user pressed ENTER while being focused on the the box.
+    RemoveTextAfterFocusLost = false, -- Speaks for itself.
+    Callback = function(Text)
+        setfpscap(Text)
+    end,
+ })
 
 
 
