@@ -52,6 +52,7 @@ local Section = Main:CreateSection("Player Information",false) -- The 2nd argume
 local playeramount = 0
 
 for i,v in pairs(game.Players:GetChildren()) do
+    task.wait(0.01)
     playeramount += 1
     print(v.Name.." is player "..playeramount)
 end
@@ -66,6 +67,7 @@ local Button = Main:CreateButton({
     Callback = function()
         playeramount = 0
         for i,v in pairs(game.Players:GetChildren()) do
+            task.wait(0.01)
             playeramount += 1
             print(v.Name.." is player "..playeramount)
         end
