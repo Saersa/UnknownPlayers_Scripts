@@ -51,15 +51,21 @@ local Section = Main:CreateSection("Player Information",false) -- The 2nd argume
 
 local playeramount = 0
 
+for i,v in pairs(game.Players:GetChildren()) do
+    playeramount += 1
+    print(v.Name.." is player "..playeramount)
+end
+
+
 local Button = Main:CreateButton({
     Name = "Update PlayerCount",
     Interact = 'Click',
     Callback = function()
         playeramount = 0
-    for i,v in pairs(game.Players:GetChildren()) do
-        playeramount += 1
-    end
-    
+        for i,v in pairs(game.Players:GetChildren()) do
+            playeramount += 1
+            print(v.Name.." is player "..playeramount)
+        end
     end,
  })
 
