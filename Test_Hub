@@ -72,7 +72,7 @@ local Section = Main:CreateSection("Player Information",false) -- The 2nd argume
 
 
 local plrAmount = Main:CreateLabel("Amount of Players: "..playeramount)
-
+local ServerID = Main:CreateLabel("GameID "..game.GameId)
 local JobID = Main:CreateLabel("JobID "..game.JobId)
 
 local Button = Main:CreateButton({
