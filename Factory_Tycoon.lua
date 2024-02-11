@@ -80,7 +80,7 @@ local Toggle = Main:CreateToggle({
          wait()
          
          for i,v in pairs(tycoon.Buttons:GetDescendants()) do
-            if v.ClassName == "Part" and v.ClassName == "TouchInterest" then
+            if v.Parent.ClassName == "Part" and v.ClassName == "TouchInterest" then
               v.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
                v.CanCollide = false
             end
