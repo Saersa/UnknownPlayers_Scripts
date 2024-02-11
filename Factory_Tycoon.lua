@@ -12,8 +12,6 @@ for _,v in pairs(game:GetService("Workspace").Tycoons:GetDescendants()) do
       print(tycoon)
    end
 end
-
-
 -----------//  GUI  \\-----------
 
 local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source.lua'))()
@@ -60,11 +58,45 @@ local Window = ArrayField:CreateWindow({
    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
       getgenv().AutoCollect = Value
-
+      while getgenv().AutoCollect == false do
+         tycoon.Build.Collect.Part.CFrame = CFrame.new(-528, 25, 667)
+      end
       while getgenv().AutoCollect == true do
          wait()
          tycoon.Build.Collect.Part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+         tycoon.Build.Collect.Part.CanCollide = false
       end
    end,
 })
 
+local Toggle = Main:CreateToggle({
+   Name = "Auto Build",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      getgenv().AutoBuild = Value
+
+      while getgenv().AutoBuild == true do
+         wait()
+         
+         for i,v in pairs(tycoon.Buttons:GetDescendants()) do
+            if v.ClassName == "Part" and v.ClassName == "TouchInterest" then
+              v.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+               v.CanCollide = false
+            end
+         end
+      end
+   end,
+})
+
+
+
+--[[
+PlayerOptions
+   Walkspeed
+   Teleport to player
+]]--[[
+Main
+   Auto Buy Buttons
+   Auto Rebirth
+]]
