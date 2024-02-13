@@ -79,7 +79,6 @@ Crime Team
 
 --Make character load
 repeat until game.Players.LocalPlayer.CharacterAdded:Wait()
-wait(5)
 robberTeam()
 for i = 1,4 do
     advertiseMessage()
