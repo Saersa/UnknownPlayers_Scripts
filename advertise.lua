@@ -44,41 +44,11 @@ local function Teleport()
    TPS:TeleportToPlaceInstance(_place, Server.id, Player)
 end
 
---[[
-
-
-
-
-Message every 30 seconds.
-
-For total of 2 minutes
-(4x)
-for i = 1,4 do
-    wait(30)
-
-end
-
-^^ can work
-
-Serverhop
-wait 20 seconds for loading in
-choose an team (criminal for red name which is obvious)
-
-
-local args = {
-    [1] = BrickColor.new(21)
-}
-
-game:GetService("ReplicatedStorage"):WaitForChild("TeamEvent"):FireServer(unpack(args))
-
-Crime Team
-
-^ can auto make this
-
-]]
 
 --Make character load
-repeat until game.Players.LocalPlayer.CharacterAdded:Wait()
+local player_Local = game.Players.LocalPlayer
+
+repeat task.wait() until player_Local.Character
 robberTeam()
 for i = 1,4 do
     advertiseMessage()
