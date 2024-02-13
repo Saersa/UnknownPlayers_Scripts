@@ -52,6 +52,7 @@ repeat task.wait() until player_Local.Character
 robberTeam()
 task.wait(2)
 for i = 1,4 do
+    i += 1
     advertiseMessage()
     task.wait(30)
 end
