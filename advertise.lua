@@ -50,8 +50,9 @@ local player_Local = game.Players.LocalPlayer
 
 repeat task.wait() until player_Local.Character
 robberTeam()
+task.wait(2)
 for i = 1,4 do
     advertiseMessage()
-    wait(30)
+    task.wait(30)
 end
 Teleport()
