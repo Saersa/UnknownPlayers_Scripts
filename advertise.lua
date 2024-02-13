@@ -1,5 +1,5 @@
 local Advertise = {
-    "can't grind all day/night to max your job or get more money? or want an account with starblocks/fintech maxed and some couple millions to spend for yourself? dm 5.56x for cheap prices",
+    "can't grind all day/night to max your job or get more money? or want an account with starblocks/fintech maxed and some couple millions to spend for yourself? dm 5.56x for cheap prices on",
 }
 
 local function advertiseMessage()
