@@ -222,7 +222,7 @@ Notification.Visible = false
 
 -- Scripts:
 
-local function KYJGHYM_fake_script() -- Time.LocalScript 
+local function UBKQ_fake_script() -- Time.LocalScript 
 	local script = Instance.new('LocalScript', Time)
 
 	local TIME_ZONE = 1
@@ -249,8 +249,8 @@ local function KYJGHYM_fake_script() -- Time.LocalScript
 	end
 	
 end
-coroutine.wrap(KYJGHYM_fake_script)()
-local function KDNCMGC_fake_script() -- Home.LocalScript 
+coroutine.wrap(UBKQ_fake_script)()
+local function DADRVOZ_fake_script() -- Home.LocalScript 
 	local script = Instance.new('LocalScript', Home)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -291,8 +291,8 @@ local function KDNCMGC_fake_script() -- Home.LocalScript
 		end
 	end)
 end
-coroutine.wrap(KDNCMGC_fake_script)()
-local function IOPR_fake_script() -- Main.LocalScript 
+coroutine.wrap(DADRVOZ_fake_script)()
+local function KGTLX_fake_script() -- Main.LocalScript 
 	local script = Instance.new('LocalScript', Main)
 
 	local frame = script.Parent.Parent.Main
@@ -311,8 +311,8 @@ local function IOPR_fake_script() -- Main.LocalScript
 	
 	game:GetService("UserInputService").InputBegan:connect(onKeyPress)
 end
-coroutine.wrap(IOPR_fake_script)()
-local function LYJGDDC_fake_script() -- Scripts.LocalScript 
+coroutine.wrap(KGTLX_fake_script)()
+local function TZOHM_fake_script() -- Scripts.LocalScript 
 	local script = Instance.new('LocalScript', Scripts)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -353,32 +353,23 @@ local function LYJGDDC_fake_script() -- Scripts.LocalScript
 		end
 	end)
 end
-coroutine.wrap(LYJGDDC_fake_script)()
-local function RMQOQBE_fake_script() -- JoinTheDsc.LocalScript 
+coroutine.wrap(TZOHM_fake_script)()
+local function KYPK_fake_script() -- JoinTheDsc.LocalScript 
 	local script = Instance.new('LocalScript', JoinTheDsc)
 
+	-- LocalScript (Client)
+	
 	local openPastebinButton = script.Parent
 	
 	local function openPastebin()
-		local pastebinAPI = "https://pastebin.com/raw/PASTE_CODE"  -- Replace PASTE_CODE with the actual code from pastebin
-	
-		local success, result = pcall(function()
-			return game:GetService("HttpService"):GetAsync(pastebinAPI)
-		end)
-	
-		if success then
-			game:GetService("GuiService"):CopyToClipboard(result)
-			print("Link copied to clipboard:", result)
-		else
-			warn("Failed to retrieve pastebin link:", result)
-		end
+		setclipboard("https://discord.gg/BNhK4kcSN9")
 	end
 	
-	-- Connect the function to the button's MouseButton1Click event
 	openPastebinButton.MouseButton1Click:Connect(openPastebin)
+	
 end
-coroutine.wrap(RMQOQBE_fake_script)()
-local function DBFRKUQ_fake_script() -- HomeFrame.HomeScript 
+coroutine.wrap(KYPK_fake_script)()
+local function THQZL_fake_script() -- HomeFrame.HomeScript 
 	local script = Instance.new('LocalScript', HomeFrame)
 
 	local Welcomer = script.Parent.Welcomer
@@ -400,4 +391,4 @@ local function DBFRKUQ_fake_script() -- HomeFrame.HomeScript
 	currentDate.Text = currentDateValue
 	
 end
-coroutine.wrap(DBFRKUQ_fake_script)()
+coroutine.wrap(THQZL_fake_script)()
