@@ -42,14 +42,14 @@ Main.Name = "Main"
 Main.Parent = agfdhgdfhfg
 Main.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
 Main.Position = UDim2.new(0.35956493, 0, 0.931490362, 0)
-Main.Size = UDim2.new(0, 436, 0, 57)
+Main.Size = UDim2.new(0.276299119, 0, 0.0876923054, 0)
 
 Time.Name = "Time"
 Time.Parent = Main
 Time.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Time.BackgroundTransparency = 1.000
 Time.Position = UDim2.new(0, 0, 0.310876667, 0)
-Time.Size = UDim2.new(0, 93, 0, 21)
+Time.Size = UDim2.new(0.213302746, 0, 0.368421048, 0)
 Time.Font = Enum.Font.FredokaOne
 Time.Text = "17:19"
 Time.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -64,7 +64,7 @@ Home.Name = "Home"
 Home.Parent = Main
 Home.BackgroundColor3 = Color3.fromRGB(74, 74, 74)
 Home.Position = UDim2.new(0.213302732, 0, 0.175438643, 0)
-Home.Size = UDim2.new(0, 36, 0, 36)
+Home.Size = UDim2.new(0.0825688094, 0, 0.631578922, 0)
 Home.Image = "rbxassetid://3926305904"
 Home.ImageRectOffset = Vector2.new(964, 204)
 Home.ImageRectSize = Vector2.new(36, 36)
@@ -76,7 +76,7 @@ Scripts.Name = "Scripts"
 Scripts.Parent = Main
 Scripts.BackgroundColor3 = Color3.fromRGB(74, 74, 74)
 Scripts.Position = UDim2.new(0.87155962, 0, 0.175438598, 0)
-Scripts.Size = UDim2.new(0, 36, 0, 36)
+Scripts.Size = UDim2.new(0.0825688094, 0, 0.631578922, 0)
 Scripts.Image = "rbxassetid://3926305904"
 Scripts.ImageRectOffset = Vector2.new(204, 524)
 Scripts.ImageRectSize = Vector2.new(36, 36)
@@ -88,13 +88,13 @@ HomeFrame.Name = "HomeFrame"
 HomeFrame.Parent = agfdhgdfhfg
 HomeFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 HomeFrame.Position = UDim2.new(0.0940499008, 0, 0.0595885292, 0)
-HomeFrame.Size = UDim2.new(0, 330, 0, 260)
+HomeFrame.Size = UDim2.new(0.209125474, 0, 0.400000006, 0)
 
 Discord.Name = "Discord"
 Discord.Parent = HomeFrame
 Discord.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Discord.Position = UDim2.new(-0.375757575, 0, 1.97692323, 0)
-Discord.Size = UDim2.new(0, 338, 0, 76)
+Discord.Size = UDim2.new(1.0242424, 0, 0.292307705, 0)
 
 UICorner_4.CornerRadius = UDim.new(0, 12)
 UICorner_4.Parent = Discord
@@ -108,7 +108,7 @@ ImageLabel.BackgroundTransparency = 1.000
 ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ImageLabel.BorderSizePixel = 0
 ImageLabel.Position = UDim2.new(0.0118343197, 0, 0.0526315793, 0)
-ImageLabel.Size = UDim2.new(0, 77, 0, 72)
+ImageLabel.Size = UDim2.new(0.227810651, 0, 0.947368443, 0)
 ImageLabel.Image = "http://www.roblox.com/asset/?id=8248378208"
 
 JoinTheDsc.Name = "JoinTheDsc"
@@ -118,7 +118,7 @@ JoinTheDsc.BackgroundTransparency = 1.000
 JoinTheDsc.BorderColor3 = Color3.fromRGB(0, 0, 0)
 JoinTheDsc.BorderSizePixel = 0
 JoinTheDsc.Position = UDim2.new(0.319526613, 0, 0.171052635, 0)
-JoinTheDsc.Size = UDim2.new(0, 200, 0, 50)
+JoinTheDsc.Size = UDim2.new(0.591715991, 0, 0.657894731, 0)
 JoinTheDsc.Font = Enum.Font.SourceSans
 JoinTheDsc.Text = "Join The Discord!"
 JoinTheDsc.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -130,7 +130,7 @@ Executor.Name = "Executor"
 Executor.Parent = HomeFrame
 Executor.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Executor.Position = UDim2.new(-0.25757575, 0, 1.55769253, 0)
-Executor.Size = UDim2.new(0, 338, 0, 74)
+Executor.Size = UDim2.new(1.0242424, 0, 0.284615397, 0)
 
 UICorner_5.CornerRadius = UDim.new(0, 12)
 UICorner_5.Parent = Executor
@@ -142,7 +142,7 @@ Name.Name = "Name"
 Name.Parent = HomeFrame
 Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Name.Position = UDim2.new(-0.130303025, 0, 1.19615412, 0)
-Name.Size = UDim2.new(0, 338, 0, 74)
+Name.Size = UDim2.new(1.0242424, 0, 0.284615397, 0)
 
 UICorner_6.CornerRadius = UDim.new(0, 12)
 UICorner_6.Parent = Name
@@ -163,7 +163,7 @@ Welcomer.BackgroundTransparency = 1.000
 Welcomer.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Welcomer.BorderSizePixel = 0
 Welcomer.Position = UDim2.new(0.172727272, 0, 0.384615391, 0)
-Welcomer.Size = UDim2.new(0, 200, 0, 50)
+Welcomer.Size = UDim2.new(0.606060624, 0, 0.192307696, 0)
 Welcomer.Font = Enum.Font.SourceSans
 Welcomer.Text = "Welcome {playername}"
 Welcomer.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -177,7 +177,7 @@ PlayerImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 PlayerImage.BorderColor3 = Color3.fromRGB(0, 0, 0)
 PlayerImage.BorderSizePixel = 0
 PlayerImage.Position = UDim2.new(0.324242413, 0, 0, 0)
-PlayerImage.Size = UDim2.new(0, 100, 0, 100)
+PlayerImage.Size = UDim2.new(0.303030312, 0, 0.384615391, 0)
 PlayerImage.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 
 UICorner_8.CornerRadius = UDim.new(0, 85)
@@ -190,7 +190,7 @@ currentGame.BackgroundTransparency = 1.000
 currentGame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 currentGame.BorderSizePixel = 0
 currentGame.Position = UDim2.new(0.196969703, 0, 0.576923072, 0)
-currentGame.Size = UDim2.new(0, 200, 0, 36)
+currentGame.Size = UDim2.new(0.606060624, 0, 0.138461545, 0)
 currentGame.Font = Enum.Font.SourceSans
 currentGame.Text = "{gameName}"
 currentGame.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -205,7 +205,7 @@ currentDate.BackgroundTransparency = 1.000
 currentDate.BorderColor3 = Color3.fromRGB(0, 0, 0)
 currentDate.BorderSizePixel = 0
 currentDate.Position = UDim2.new(0, 0, 0.86153847, 0)
-currentDate.Size = UDim2.new(0, 154, 0, 36)
+currentDate.Size = UDim2.new(0.466666669, 0, 0.138461545, 0)
 currentDate.Font = Enum.Font.SourceSans
 currentDate.Text = "{date}"
 currentDate.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -217,12 +217,12 @@ Notification.Name = "Notification"
 Notification.Parent = agfdhgdfhfg
 Notification.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Notification.Position = UDim2.new(0.936020494, 0, 0.894972086, 0)
-Notification.Size = UDim2.new(0, 100, 0, 100)
+Notification.Size = UDim2.new(0.0633713529, 0, 0.15384616, 0)
 Notification.Visible = false
 
 -- Scripts:
 
-local function XNVTUZM_fake_script() -- Time.LocalScript 
+local function KYJGHYM_fake_script() -- Time.LocalScript 
 	local script = Instance.new('LocalScript', Time)
 
 	local TIME_ZONE = 1
@@ -249,8 +249,8 @@ local function XNVTUZM_fake_script() -- Time.LocalScript
 	end
 	
 end
-coroutine.wrap(XNVTUZM_fake_script)()
-local function TIZKX_fake_script() -- Home.LocalScript 
+coroutine.wrap(KYJGHYM_fake_script)()
+local function KDNCMGC_fake_script() -- Home.LocalScript 
 	local script = Instance.new('LocalScript', Home)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -291,8 +291,8 @@ local function TIZKX_fake_script() -- Home.LocalScript
 		end
 	end)
 end
-coroutine.wrap(TIZKX_fake_script)()
-local function UARRV_fake_script() -- Main.LocalScript 
+coroutine.wrap(KDNCMGC_fake_script)()
+local function IOPR_fake_script() -- Main.LocalScript 
 	local script = Instance.new('LocalScript', Main)
 
 	local frame = script.Parent.Parent.Main
@@ -311,8 +311,8 @@ local function UARRV_fake_script() -- Main.LocalScript
 	
 	game:GetService("UserInputService").InputBegan:connect(onKeyPress)
 end
-coroutine.wrap(UARRV_fake_script)()
-local function LPWBHBU_fake_script() -- Scripts.LocalScript 
+coroutine.wrap(IOPR_fake_script)()
+local function LYJGDDC_fake_script() -- Scripts.LocalScript 
 	local script = Instance.new('LocalScript', Scripts)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -353,8 +353,8 @@ local function LPWBHBU_fake_script() -- Scripts.LocalScript
 		end
 	end)
 end
-coroutine.wrap(LPWBHBU_fake_script)()
-local function GNTE_fake_script() -- JoinTheDsc.LocalScript 
+coroutine.wrap(LYJGDDC_fake_script)()
+local function RMQOQBE_fake_script() -- JoinTheDsc.LocalScript 
 	local script = Instance.new('LocalScript', JoinTheDsc)
 
 	local openPastebinButton = script.Parent
@@ -377,8 +377,8 @@ local function GNTE_fake_script() -- JoinTheDsc.LocalScript
 	-- Connect the function to the button's MouseButton1Click event
 	openPastebinButton.MouseButton1Click:Connect(openPastebin)
 end
-coroutine.wrap(GNTE_fake_script)()
-local function JAAN_fake_script() -- HomeFrame.HomeScript 
+coroutine.wrap(RMQOQBE_fake_script)()
+local function DBFRKUQ_fake_script() -- HomeFrame.HomeScript 
 	local script = Instance.new('LocalScript', HomeFrame)
 
 	local Welcomer = script.Parent.Welcomer
@@ -400,4 +400,4 @@ local function JAAN_fake_script() -- HomeFrame.HomeScript
 	currentDate.Text = currentDateValue
 	
 end
-coroutine.wrap(JAAN_fake_script)()
+coroutine.wrap(DBFRKUQ_fake_script)()
