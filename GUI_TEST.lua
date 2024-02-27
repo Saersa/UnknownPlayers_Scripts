@@ -20,9 +20,11 @@ local JoinTheDsc = Instance.new("TextButton")
 local Executor = Instance.new("Frame")
 local UICorner_5 = Instance.new("UICorner")
 local UIGradient_2 = Instance.new("UIGradient")
+local TextLabel = Instance.new("TextLabel")
 local Name = Instance.new("Frame")
 local UICorner_6 = Instance.new("UICorner")
 local UIGradient_3 = Instance.new("UIGradient")
+local playerName = Instance.new("TextLabel")
 local UICorner_7 = Instance.new("UICorner")
 local UIGradient_4 = Instance.new("UIGradient")
 local Welcomer = Instance.new("TextLabel")
@@ -138,6 +140,16 @@ UICorner_5.Parent = Executor
 UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(109, 0, 2)), ColorSequenceKeypoint.new(0.62, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
 UIGradient_2.Parent = Executor
 
+TextLabel.Parent = Executor
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.204142019, 0, 0.162162155, 0)
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextSize = 14.000
+
 Name.Name = "Name"
 Name.Parent = HomeFrame
 Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -149,6 +161,21 @@ UICorner_6.Parent = Name
 
 UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(23, 152, 133)), ColorSequenceKeypoint.new(0.72, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
 UIGradient_3.Parent = Name
+
+playerName.Name = "playerName"
+playerName.Parent = Name
+playerName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+playerName.BackgroundTransparency = 1.000
+playerName.BorderColor3 = Color3.fromRGB(0, 0, 0)
+playerName.BorderSizePixel = 0
+playerName.Position = UDim2.new(0.0177515242, 0, 0.162162155, 0)
+playerName.Size = UDim2.new(0, 332, 0, 50)
+playerName.Font = Enum.Font.SourceSans
+playerName.Text = "{PLAYERNAME}"
+playerName.TextColor3 = Color3.fromRGB(255, 255, 255)
+playerName.TextScaled = true
+playerName.TextSize = 14.000
+playerName.TextWrapped = true
 
 UICorner_7.CornerRadius = UDim.new(0, 12)
 UICorner_7.Parent = HomeFrame
@@ -222,7 +249,7 @@ Notification.Visible = false
 
 -- Scripts:
 
-local function UBKQ_fake_script() -- Time.LocalScript 
+local function SUHPHZQ_fake_script() -- Time.LocalScript 
 	local script = Instance.new('LocalScript', Time)
 
 	local TIME_ZONE = 1
@@ -249,8 +276,8 @@ local function UBKQ_fake_script() -- Time.LocalScript
 	end
 	
 end
-coroutine.wrap(UBKQ_fake_script)()
-local function DADRVOZ_fake_script() -- Home.LocalScript 
+coroutine.wrap(SUHPHZQ_fake_script)()
+local function XWICX_fake_script() -- Home.LocalScript 
 	local script = Instance.new('LocalScript', Home)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -291,8 +318,8 @@ local function DADRVOZ_fake_script() -- Home.LocalScript
 		end
 	end)
 end
-coroutine.wrap(DADRVOZ_fake_script)()
-local function KGTLX_fake_script() -- Main.LocalScript 
+coroutine.wrap(XWICX_fake_script)()
+local function NWRLDP_fake_script() -- Main.LocalScript 
 	local script = Instance.new('LocalScript', Main)
 
 	local frame = script.Parent.Parent.Main
@@ -311,8 +338,8 @@ local function KGTLX_fake_script() -- Main.LocalScript
 	
 	game:GetService("UserInputService").InputBegan:connect(onKeyPress)
 end
-coroutine.wrap(KGTLX_fake_script)()
-local function TZOHM_fake_script() -- Scripts.LocalScript 
+coroutine.wrap(NWRLDP_fake_script)()
+local function SINR_fake_script() -- Scripts.LocalScript 
 	local script = Instance.new('LocalScript', Scripts)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -353,8 +380,8 @@ local function TZOHM_fake_script() -- Scripts.LocalScript
 		end
 	end)
 end
-coroutine.wrap(TZOHM_fake_script)()
-local function KYPK_fake_script() -- JoinTheDsc.LocalScript 
+coroutine.wrap(SINR_fake_script)()
+local function OEZW_fake_script() -- JoinTheDsc.LocalScript 
 	local script = Instance.new('LocalScript', JoinTheDsc)
 
 	-- LocalScript (Client)
@@ -363,13 +390,32 @@ local function KYPK_fake_script() -- JoinTheDsc.LocalScript
 	
 	local function openPastebin()
 		setclipboard("https://discord.gg/BNhK4kcSN9")
+		script.Parent.Text = "Copied to Clipboard"
+		wait(2)
+		script.Parent.Text = "Join The Discord"
 	end
 	
 	openPastebinButton.MouseButton1Click:Connect(openPastebin)
 	
 end
-coroutine.wrap(KYPK_fake_script)()
-local function THQZL_fake_script() -- HomeFrame.HomeScript 
+coroutine.wrap(OEZW_fake_script)()
+local function GTAKWI_fake_script() -- TextLabel.LocalScript 
+	local script = Instance.new('LocalScript', TextLabel)
+
+	local is_executor_closure = is_syn_closure or is_fluxus_closure or is_sentinel_closure or is_krnl_closure or is_proto_closure or is_calamari_closure or is_electron_closure or is_elysian_closure
+	
+	script.Parent.Text = is_executor_closure
+end
+coroutine.wrap(GTAKWI_fake_script)()
+local function SUFKSWN_fake_script() -- playerName.LocalScript 
+	local script = Instance.new('LocalScript', playerName)
+
+	script.Parent.Text = game.Players.LocalPlayer.DisplayName.."(@"..game.Players.LocalPlayer.Name..")"
+	
+	
+end
+coroutine.wrap(SUFKSWN_fake_script)()
+local function ZMOB_fake_script() -- HomeFrame.HomeScript 
 	local script = Instance.new('LocalScript', HomeFrame)
 
 	local Welcomer = script.Parent.Welcomer
@@ -391,4 +437,4 @@ local function THQZL_fake_script() -- HomeFrame.HomeScript
 	currentDate.Text = currentDateValue
 	
 end
-coroutine.wrap(THQZL_fake_script)()
+coroutine.wrap(ZMOB_fake_script)()
