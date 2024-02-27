@@ -80,10 +80,10 @@ local Toggle = Main:CreateToggle({
       while getgenv().AutoBuild == true do
          wait()
          for i,v in pairs(tycoon.Buttons:GetDescendants()) do
-            if v.Parent.ClassName == "Part" and v.name == "TouchInterest" and v.Parent then
-               firetouchinterest(Playerhead, v,0)
+            if v.ClassName == "TouchInterest" then
+               firetouchinterest(Playerhead, v.Parent,0)
                wait(0.1)
-               firetouchinterest(Playerhead, v,1)
+               firetouchinterest(Playerhead, v.Parent,1)
             end
          end
       end
