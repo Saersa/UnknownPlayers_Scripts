@@ -88,6 +88,7 @@ HomeFrame.Parent = agfdhgdfhfg
 HomeFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 HomeFrame.Position = UDim2.new(0.0902476162, 0, 0.230357766, 0)
 HomeFrame.Size = UDim2.new(0.209125474, 0, 0.400000006, 0)
+HomeFrame.Visible = false
 
 Discord.Name = "Discord"
 Discord.Parent = HomeFrame
@@ -224,7 +225,7 @@ Notification.Visible = false
 
 -- Scripts:
 
-local function MASVWJJ_fake_script() -- Time.LocalScript 
+local function IAIOCZW_fake_script() -- Time.LocalScript 
 	local script = Instance.new('LocalScript', Time)
 
 	local TIME_ZONE = 1
@@ -251,8 +252,8 @@ local function MASVWJJ_fake_script() -- Time.LocalScript
 	end
 	
 end
-coroutine.wrap(MASVWJJ_fake_script)()
-local function MGKHRW_fake_script() -- Home.LocalScript 
+coroutine.wrap(IAIOCZW_fake_script)()
+local function CEGNZDM_fake_script() -- Home.LocalScript 
 	local script = Instance.new('LocalScript', Home)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -293,8 +294,8 @@ local function MGKHRW_fake_script() -- Home.LocalScript
 		end
 	end)
 end
-coroutine.wrap(MGKHRW_fake_script)()
-local function HJAFXBP_fake_script() -- Main.LocalScript 
+coroutine.wrap(CEGNZDM_fake_script)()
+local function YWKR_fake_script() -- Main.LocalScript 
 	local script = Instance.new('LocalScript', Main)
 
 	local frame = script.Parent.Parent.Main
@@ -313,8 +314,8 @@ local function HJAFXBP_fake_script() -- Main.LocalScript
 	
 	game:GetService("UserInputService").InputBegan:connect(onKeyPress)
 end
-coroutine.wrap(HJAFXBP_fake_script)()
-local function ZJETSNX_fake_script() -- Scripts.LocalScript 
+coroutine.wrap(YWKR_fake_script)()
+local function GYWPD_fake_script() -- Scripts.LocalScript 
 	local script = Instance.new('LocalScript', Scripts)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -355,8 +356,8 @@ local function ZJETSNX_fake_script() -- Scripts.LocalScript
 		end
 	end)
 end
-coroutine.wrap(ZJETSNX_fake_script)()
-local function TPLVT_fake_script() -- JoinTheDsc.LocalScript 
+coroutine.wrap(GYWPD_fake_script)()
+local function PPUW_fake_script() -- JoinTheDsc.LocalScript 
 	local script = Instance.new('LocalScript', JoinTheDsc)
 
 	-- LocalScript (Client)
@@ -373,16 +374,16 @@ local function TPLVT_fake_script() -- JoinTheDsc.LocalScript
 	openPastebinButton.MouseButton1Click:Connect(openPastebin)
 	
 end
-coroutine.wrap(TPLVT_fake_script)()
-local function LINBLF_fake_script() -- playerName.LocalScript 
+coroutine.wrap(PPUW_fake_script)()
+local function NLTEDBZ_fake_script() -- playerName.LocalScript 
 	local script = Instance.new('LocalScript', playerName)
 
 	script.Parent.Text = game.Players.LocalPlayer.DisplayName.."(@"..game.Players.LocalPlayer.Name..")"
 	
 	
 end
-coroutine.wrap(LINBLF_fake_script)()
-local function HVQACR_fake_script() -- HomeFrame.HomeScript 
+coroutine.wrap(NLTEDBZ_fake_script)()
+local function YDYBW_fake_script() -- HomeFrame.HomeScript 
 	local script = Instance.new('LocalScript', HomeFrame)
 
 	local Welcomer = script.Parent.Welcomer
@@ -404,5 +405,4 @@ local function HVQACR_fake_script() -- HomeFrame.HomeScript
 	currentDate.Text = currentDateValue
 	
 end
-coroutine.wrap(HVQACR_fake_script)()
-
+coroutine.wrap(YDYBW_fake_script)()
