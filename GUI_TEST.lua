@@ -1,7 +1,8 @@
--- Gui to Lua
--- Version: 3.2
+getgenv().GUILOADING = true
 
--- Instances:
+if getgenv().GUILOADING then
+	print("Already loaded")
+end
 
 local agfdhgdfhfg = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
@@ -17,19 +18,15 @@ local UICorner_4 = Instance.new("UICorner")
 local UIGradient = Instance.new("UIGradient")
 local ImageLabel = Instance.new("ImageLabel")
 local JoinTheDsc = Instance.new("TextButton")
-local Executor = Instance.new("Frame")
+local Name = Instance.new("Frame")
 local UICorner_5 = Instance.new("UICorner")
 local UIGradient_2 = Instance.new("UIGradient")
-local TextLabel = Instance.new("TextLabel")
-local Name = Instance.new("Frame")
+local playerName = Instance.new("TextLabel")
 local UICorner_6 = Instance.new("UICorner")
 local UIGradient_3 = Instance.new("UIGradient")
-local playerName = Instance.new("TextLabel")
-local UICorner_7 = Instance.new("UICorner")
-local UIGradient_4 = Instance.new("UIGradient")
 local Welcomer = Instance.new("TextLabel")
 local PlayerImage = Instance.new("ImageLabel")
-local UICorner_8 = Instance.new("UICorner")
+local UICorner_7 = Instance.new("UICorner")
 local currentGame = Instance.new("TextLabel")
 local currentDate = Instance.new("TextLabel")
 local Notification = Instance.new("Frame")
@@ -89,13 +86,13 @@ UICorner_3.Parent = Scripts
 HomeFrame.Name = "HomeFrame"
 HomeFrame.Parent = agfdhgdfhfg
 HomeFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-HomeFrame.Position = UDim2.new(0.0940499008, 0, 0.0595885292, 0)
+HomeFrame.Position = UDim2.new(0.0902476162, 0, 0.230357766, 0)
 HomeFrame.Size = UDim2.new(0.209125474, 0, 0.400000006, 0)
 
 Discord.Name = "Discord"
 Discord.Parent = HomeFrame
 Discord.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Discord.Position = UDim2.new(-0.375757575, 0, 1.97692323, 0)
+Discord.Position = UDim2.new(-0.396969706, 0, 1.58461559, 0)
 Discord.Size = UDim2.new(1.0242424, 0, 0.292307705, 0)
 
 UICorner_4.CornerRadius = UDim.new(0, 12)
@@ -128,39 +125,17 @@ JoinTheDsc.TextScaled = true
 JoinTheDsc.TextSize = 14.000
 JoinTheDsc.TextWrapped = true
 
-Executor.Name = "Executor"
-Executor.Parent = HomeFrame
-Executor.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Executor.Position = UDim2.new(-0.25757575, 0, 1.55769253, 0)
-Executor.Size = UDim2.new(1.0242424, 0, 0.284615397, 0)
-
-UICorner_5.CornerRadius = UDim.new(0, 12)
-UICorner_5.Parent = Executor
-
-UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(109, 0, 2)), ColorSequenceKeypoint.new(0.62, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
-UIGradient_2.Parent = Executor
-
-TextLabel.Parent = Executor
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(0.204142019, 0, 0.162162155, 0)
-TextLabel.Size = UDim2.new(0, 200, 0, 50)
-TextLabel.Font = Enum.Font.SourceSans
-TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-TextLabel.TextSize = 14.000
-
 Name.Name = "Name"
 Name.Parent = HomeFrame
 Name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Name.Position = UDim2.new(-0.130303025, 0, 1.19615412, 0)
+Name.Position = UDim2.new(-0.130303025, 0, 1.17307711, 0)
 Name.Size = UDim2.new(1.0242424, 0, 0.284615397, 0)
 
-UICorner_6.CornerRadius = UDim.new(0, 12)
-UICorner_6.Parent = Name
+UICorner_5.CornerRadius = UDim.new(0, 12)
+UICorner_5.Parent = Name
 
-UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(23, 152, 133)), ColorSequenceKeypoint.new(0.72, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
-UIGradient_3.Parent = Name
+UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(23, 152, 133)), ColorSequenceKeypoint.new(0.72, Color3.fromRGB(0, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
+UIGradient_2.Parent = Name
 
 playerName.Name = "playerName"
 playerName.Parent = Name
@@ -168,7 +143,7 @@ playerName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 playerName.BackgroundTransparency = 1.000
 playerName.BorderColor3 = Color3.fromRGB(0, 0, 0)
 playerName.BorderSizePixel = 0
-playerName.Position = UDim2.new(0.0177515242, 0, 0.162162155, 0)
+playerName.Position = UDim2.new(0.00591725018, 0, 0.162162155, 0)
 playerName.Size = UDim2.new(0, 332, 0, 50)
 playerName.Font = Enum.Font.SourceSans
 playerName.Text = "{PLAYERNAME}"
@@ -177,11 +152,11 @@ playerName.TextScaled = true
 playerName.TextSize = 14.000
 playerName.TextWrapped = true
 
-UICorner_7.CornerRadius = UDim.new(0, 12)
-UICorner_7.Parent = HomeFrame
+UICorner_6.CornerRadius = UDim.new(0, 12)
+UICorner_6.Parent = HomeFrame
 
-UIGradient_4.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(18, 241, 7)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
-UIGradient_4.Parent = HomeFrame
+UIGradient_3.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(18, 241, 7)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 0, 0))}
+UIGradient_3.Parent = HomeFrame
 
 Welcomer.Name = "Welcomer"
 Welcomer.Parent = HomeFrame
@@ -207,8 +182,8 @@ PlayerImage.Position = UDim2.new(0.324242413, 0, 0, 0)
 PlayerImage.Size = UDim2.new(0.303030312, 0, 0.384615391, 0)
 PlayerImage.Image = "rbxasset://textures/ui/GuiImagePlaceholder.png"
 
-UICorner_8.CornerRadius = UDim.new(0, 85)
-UICorner_8.Parent = PlayerImage
+UICorner_7.CornerRadius = UDim.new(0, 85)
+UICorner_7.Parent = PlayerImage
 
 currentGame.Name = "currentGame"
 currentGame.Parent = HomeFrame
@@ -249,7 +224,7 @@ Notification.Visible = false
 
 -- Scripts:
 
-local function SUHPHZQ_fake_script() -- Time.LocalScript 
+local function MASVWJJ_fake_script() -- Time.LocalScript 
 	local script = Instance.new('LocalScript', Time)
 
 	local TIME_ZONE = 1
@@ -276,8 +251,8 @@ local function SUHPHZQ_fake_script() -- Time.LocalScript
 	end
 	
 end
-coroutine.wrap(SUHPHZQ_fake_script)()
-local function XWICX_fake_script() -- Home.LocalScript 
+coroutine.wrap(MASVWJJ_fake_script)()
+local function MGKHRW_fake_script() -- Home.LocalScript 
 	local script = Instance.new('LocalScript', Home)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -318,8 +293,8 @@ local function XWICX_fake_script() -- Home.LocalScript
 		end
 	end)
 end
-coroutine.wrap(XWICX_fake_script)()
-local function NWRLDP_fake_script() -- Main.LocalScript 
+coroutine.wrap(MGKHRW_fake_script)()
+local function HJAFXBP_fake_script() -- Main.LocalScript 
 	local script = Instance.new('LocalScript', Main)
 
 	local frame = script.Parent.Parent.Main
@@ -338,8 +313,8 @@ local function NWRLDP_fake_script() -- Main.LocalScript
 	
 	game:GetService("UserInputService").InputBegan:connect(onKeyPress)
 end
-coroutine.wrap(NWRLDP_fake_script)()
-local function SINR_fake_script() -- Scripts.LocalScript 
+coroutine.wrap(HJAFXBP_fake_script)()
+local function ZJETSNX_fake_script() -- Scripts.LocalScript 
 	local script = Instance.new('LocalScript', Scripts)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -380,8 +355,8 @@ local function SINR_fake_script() -- Scripts.LocalScript
 		end
 	end)
 end
-coroutine.wrap(SINR_fake_script)()
-local function OEZW_fake_script() -- JoinTheDsc.LocalScript 
+coroutine.wrap(ZJETSNX_fake_script)()
+local function TPLVT_fake_script() -- JoinTheDsc.LocalScript 
 	local script = Instance.new('LocalScript', JoinTheDsc)
 
 	-- LocalScript (Client)
@@ -398,24 +373,16 @@ local function OEZW_fake_script() -- JoinTheDsc.LocalScript
 	openPastebinButton.MouseButton1Click:Connect(openPastebin)
 	
 end
-coroutine.wrap(OEZW_fake_script)()
-local function GTAKWI_fake_script() -- TextLabel.LocalScript 
-	local script = Instance.new('LocalScript', TextLabel)
-
-	local is_executor_closure = is_syn_closure or is_fluxus_closure or is_sentinel_closure or is_krnl_closure or is_proto_closure or is_calamari_closure or is_electron_closure or is_elysian_closure
-	
-	script.Parent.Text = is_executor_closure
-end
-coroutine.wrap(GTAKWI_fake_script)()
-local function SUFKSWN_fake_script() -- playerName.LocalScript 
+coroutine.wrap(TPLVT_fake_script)()
+local function LINBLF_fake_script() -- playerName.LocalScript 
 	local script = Instance.new('LocalScript', playerName)
 
 	script.Parent.Text = game.Players.LocalPlayer.DisplayName.."(@"..game.Players.LocalPlayer.Name..")"
 	
 	
 end
-coroutine.wrap(SUFKSWN_fake_script)()
-local function ZMOB_fake_script() -- HomeFrame.HomeScript 
+coroutine.wrap(LINBLF_fake_script)()
+local function HVQACR_fake_script() -- HomeFrame.HomeScript 
 	local script = Instance.new('LocalScript', HomeFrame)
 
 	local Welcomer = script.Parent.Welcomer
@@ -437,4 +404,5 @@ local function ZMOB_fake_script() -- HomeFrame.HomeScript
 	currentDate.Text = currentDateValue
 	
 end
-coroutine.wrap(ZMOB_fake_script)()
+coroutine.wrap(HVQACR_fake_script)()
+
