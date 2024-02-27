@@ -59,6 +59,7 @@ local Window = ArrayField:CreateWindow({
    Callback = function(Value)
       getgenv().AutoCollect = Value
       while getgenv().AutoCollect == false do
+         wait()
          tycoon.Build.Collect.Part.CFrame = CFrame.new(-528, 25, 667)
       end
       while getgenv().AutoCollect == true do
@@ -78,11 +79,11 @@ local Toggle = Main:CreateToggle({
 
       while getgenv().AutoBuild == true do
          wait()
-         
          for i,v in pairs(tycoon.Buttons:GetDescendants()) do
-            if v.Parent.ClassName == "Part" and v.ClassName == "TouchInterest" then
-              v.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-               v.CanCollide = false
+            if v.Parent.ClassName == "Part" and v.name == "TouchInterest" and v.Parent then
+               firetouchinterest(Playerhead, v.Parent,0)
+               wait(0.1)
+               firetouchinterest(Playerhead, v.Parent,1)
             end
          end
       end
