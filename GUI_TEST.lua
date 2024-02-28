@@ -4,6 +4,9 @@ if getgenv().GUILOADING then
 	print("Already loaded")
 end
 
+
+
+
 local agfdhgdfhfg = Instance.new("ScreenGui")
 local Main = Instance.new("Frame")
 local Time = Instance.new("TextLabel")
@@ -225,7 +228,7 @@ Notification.Visible = false
 
 -- Scripts:
 
-local function IAIOCZW_fake_script() -- Time.LocalScript 
+local function XHQXW_fake_script() -- Time.LocalScript 
 	local script = Instance.new('LocalScript', Time)
 
 	local TIME_ZONE = 1
@@ -252,8 +255,8 @@ local function IAIOCZW_fake_script() -- Time.LocalScript
 	end
 	
 end
-coroutine.wrap(IAIOCZW_fake_script)()
-local function CEGNZDM_fake_script() -- Home.LocalScript 
+coroutine.wrap(XHQXW_fake_script)()
+local function FCRGMWM_fake_script() -- Home.LocalScript 
 	local script = Instance.new('LocalScript', Home)
 
 	script.Parent.MouseButton1Click:Connect(function()
@@ -293,32 +296,9 @@ local function CEGNZDM_fake_script() -- Home.LocalScript
 	
 		end
 	end)
-end
-coroutine.wrap(CEGNZDM_fake_script)()
-local function YWKR_fake_script() -- Main.LocalScript 
-	local script = Instance.new('LocalScript', Main)
-
-	local frame = script.Parent.Parent.Main
 	
-	function onKeyPress(inputObject, gameProcessedEvent)
-		if inputObject.KeyCode == Enum.KeyCode.RightShift then
-			if frame.Visible == false then
-				
-				
-				frame.Visible = true
-			else
-				frame.Visible = false
-			end
-		end
-	end
 	
-	game:GetService("UserInputService").InputBegan:connect(onKeyPress)
-end
-coroutine.wrap(YWKR_fake_script)()
-local function GYWPD_fake_script() -- Scripts.LocalScript 
-	local script = Instance.new('LocalScript', Scripts)
-
-	script.Parent.MouseButton1Click:Connect(function()
+	script.Parent.TouchTap:Connect(function()
 		if script.Parent.Parent.Parent.HomeFrame.Visible == true then
 			script.Parent.Parent.Parent.HomeFrame.Visible = false
 			for i = 50,70 do
@@ -338,7 +318,7 @@ local function GYWPD_fake_script() -- Scripts.LocalScript
 		end
 	end)
 	
-	script.Parent.MouseButton1Click:Connect(function()
+	script.Parent.TouchTap:Connect(function()
 		if script.Parent.Parent.Parent.HomeFrame.Visible == true then
 	
 			for i= 24,0,-1 do
@@ -356,8 +336,40 @@ local function GYWPD_fake_script() -- Scripts.LocalScript
 		end
 	end)
 end
-coroutine.wrap(GYWPD_fake_script)()
-local function PPUW_fake_script() -- JoinTheDsc.LocalScript 
+coroutine.wrap(FCRGMWM_fake_script)()
+local function KPHJ_fake_script() -- Main.LocalScript 
+	local script = Instance.new('LocalScript', Main)
+
+	local frame = script.Parent.Parent.Main
+	
+	function onKeyPress(inputObject, gameProcessedEvent)
+		if inputObject.KeyCode == Enum.KeyCode.RightShift then
+			if frame.Visible == false then
+				
+				
+				frame.Visible = true
+			else
+				frame.Visible = false
+			end
+		end
+	end
+	
+	game:GetService("UserInputService").InputBegan:connect(onKeyPress)
+end
+coroutine.wrap(KPHJ_fake_script)()
+local function MZGKVK_fake_script() -- Scripts.LocalScript 
+	local script = Instance.new('LocalScript', Scripts)
+
+	script.Parent.MouseButton1Click:Connect(function()
+		loadstring(game:HttpGet(('https://raw.githubusercontent.com/Doran342545345/Dorans-Test-SCripts/main/LoadString.lua'),true))()
+	end)
+	
+	script.Parent.TouchTap:Connect(function()
+			loadstring(game:HttpGet(('https://raw.githubusercontent.com/Doran342545345/Dorans-Test-SCripts/main/LoadString.lua'),true))()
+	end)
+end
+coroutine.wrap(MZGKVK_fake_script)()
+local function PEDPD_fake_script() -- JoinTheDsc.LocalScript 
 	local script = Instance.new('LocalScript', JoinTheDsc)
 
 	-- LocalScript (Client)
@@ -374,16 +386,16 @@ local function PPUW_fake_script() -- JoinTheDsc.LocalScript
 	openPastebinButton.MouseButton1Click:Connect(openPastebin)
 	
 end
-coroutine.wrap(PPUW_fake_script)()
-local function NLTEDBZ_fake_script() -- playerName.LocalScript 
+coroutine.wrap(PEDPD_fake_script)()
+local function DKTYMU_fake_script() -- playerName.LocalScript 
 	local script = Instance.new('LocalScript', playerName)
 
 	script.Parent.Text = game.Players.LocalPlayer.DisplayName.."(@"..game.Players.LocalPlayer.Name..")"
 	
 	
 end
-coroutine.wrap(NLTEDBZ_fake_script)()
-local function YDYBW_fake_script() -- HomeFrame.HomeScript 
+coroutine.wrap(DKTYMU_fake_script)()
+local function ZKWCIS_fake_script() -- HomeFrame.HomeScript 
 	local script = Instance.new('LocalScript', HomeFrame)
 
 	local Welcomer = script.Parent.Welcomer
@@ -405,4 +417,4 @@ local function YDYBW_fake_script() -- HomeFrame.HomeScript
 	currentDate.Text = currentDateValue
 	
 end
-coroutine.wrap(YDYBW_fake_script)()
+coroutine.wrap(ZKWCIS_fake_script)()
