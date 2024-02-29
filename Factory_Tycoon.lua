@@ -66,6 +66,7 @@ local Window = ArrayField:CreateWindow({
          wait()
          tycoon.Build.Collect.Part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
          tycoon.Build.Collect.Part.CanCollide = false
+         tycoon.Build.Collect.Part.Transparency = 1
       end
    end,
 })
