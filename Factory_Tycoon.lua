@@ -117,7 +117,7 @@ local ToggleBuild = Main:CreateToggle({
 local function clearOres()
    wait()
    for i,v in pairs(tycoon.Ores:GetChildren()) do
-      v:Destroy()
+      v.Transparency = 1
    end
 end
 
