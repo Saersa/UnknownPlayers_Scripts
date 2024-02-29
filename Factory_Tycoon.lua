@@ -114,6 +114,27 @@ local ToggleBuild = Main:CreateToggle({
 })
 
 
+local function clearOres()
+   wait()
+   for i,v in pairs(tycoon.Ores:GetChildren()) do
+      v:Destroy()
+   end
+end
+
+
+
+local Toggle = Main:CreateToggle({
+   Name = "Auto Collect",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      getgenv().AutoCollect = Value
+      while getgenv().AutoCollect == true do
+         wait()
+      clearOres()
+      end
+   end,
+})
 
 
 --[[
