@@ -80,11 +80,12 @@ local Toggle = Main:CreateToggle({
       while getgenv().AutoBuild == true do
          wait()
          for i,v in pairs(tycoon.Buttons:GetDescendants()) do
-            if v.ClassName == "TouchInterest" then
-               firetouchinterest(Playerhead, v.Parent,0)
-               wait(0.1)
-               firetouchinterest(Playerhead, v.Parent,1)
+            if v.ClassName == "TouchInterest" and v.Parent.ClassName == "Part" then
+               v.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+               tycoon.Build.Collect.Part.CanCollide = false
+               v.Transparency = 0.8
             end
+  
          end
       end
    end,
