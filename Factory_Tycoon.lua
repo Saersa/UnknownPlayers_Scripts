@@ -73,23 +73,24 @@ local Window = ArrayField:CreateWindow({
 local Toggle = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "Toggle1",
    Callback = function(Value)
       getgenv().AutoBuild = Value
 
       while getgenv().AutoBuild == true do
          wait()
-         for i,v in pairs(tycoon.Buttons:GetDescendants()) do
+         for i, v in pairs(tycoon.Buttons:GetDescendants()) do
             if v.ClassName == "TouchInterest" and v.Parent.ClassName == "Part" then
-               v.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+               local part = v.Parent
+               part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
                tycoon.Build.Collect.Part.CanCollide = false
                v.Transparency = 0.8
             end
-  
          end
       end
    end,
 })
+
 
 
 
