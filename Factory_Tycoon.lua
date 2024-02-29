@@ -94,17 +94,25 @@ local ToggleBuild = Main:CreateToggle({
             for i, v in pairs(tycoon.Buttons:GetDescendants()) do
                if v.ClassName == "TouchInterest" and v.Parent.ClassName == "Part" then
                   local part = v.Parent
-                  game.Players.LocalPlayer.Character:MoveTo(part.Position)
-                  part.CanCollide = false
-                  part.Transparency = 0.8
-                  lastTeleportTime = currentTime  -- Update the last teleport time
-                  wait(teleportCooldown)  -- Wait for the cooldown
+                  local success, err = pcall(function()
+                     game.Players.LocalPlayer.Character:MoveTo(part.Position)
+                  end)
+
+                  if not success then
+                     warn("Teleportation failed:", err)
+                  else
+                     part.CanCollide = false
+                     part.Transparency = 0.8
+                     lastTeleportTime = currentTime  -- Update the last teleport time
+                     wait(teleportCooldown)  -- Wait for the cooldown
+                  end
                end
             end
          end
       end
    end,
 })
+
 
 
 
