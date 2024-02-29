@@ -61,6 +61,7 @@ local Window = ArrayField:CreateWindow({
       while getgenv().AutoCollect == false do
          wait()
          tycoon.Build.Collect.Part.CFrame = CFrame.new(-528, 25, 667)
+         tycoon.Build.Collect.Part.Transparency = 0
       end
       while getgenv().AutoCollect == true do
          wait()
