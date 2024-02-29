@@ -6,6 +6,10 @@ local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.Place
 
 local tycoon = nil
 
+local teleportCooldown = 1
+local lastTeleportTime = 0
+
+
 for _,v in pairs(game:GetService("Workspace").Tycoons:GetDescendants()) do
    if v.ClassName == "ObjectValue" and v.Value == game.Players.LocalPlayer then
       tycoon = v.Parent
@@ -72,6 +76,7 @@ local Window = ArrayField:CreateWindow({
    end,
 })
 
+
 local ToggleBuild = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
@@ -81,12 +86,20 @@ local ToggleBuild = Main:CreateToggle({
 
       while getgenv().AutoBuild == true do
          wait()
-         for i, v in pairs(tycoon.Buttons:GetDescendants()) do
-            if v.ClassName == "TouchInterest" and v.Parent.ClassName == "Part" then
-               local part = v.Parent
-               part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-               part.CanCollide = false
-               part.Transparency = 0.8
+
+         local currentTime = tick()
+
+         -- Check if enough time has passed since the last teleport
+         if currentTime - lastTeleportTime >= teleportCooldown then
+            for i, v in pairs(tycoon.Buttons:GetDescendants()) do
+               if v.ClassName == "TouchInterest" and v.Parent.ClassName == "Part" then
+                  local part = v.Parent
+                  game.Players.LocalPlayer.Character:MoveTo(part.Position)
+                  part.CanCollide = false
+                  part.Transparency = 0.8
+                  lastTeleportTime = currentTime  -- Update the last teleport time
+                  wait(teleportCooldown)  -- Wait for the cooldown
+               end
             end
          end
       end
