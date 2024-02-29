@@ -60,7 +60,7 @@ local Window = ArrayField:CreateWindow({
       getgenv().AutoCollect = Value
       while getgenv().AutoCollect == false do
          wait()
-         tycoon.Build.Collect.Part.CFrame = CFrame.new(-528, 25, 667)
+         tycoon.Build.Collect.Part.CFrame = CFrame.new(tycoon.Build.Collect.Union.Position)
          tycoon.Build.Collect.Part.Transparency = 0
       end
       while getgenv().AutoCollect == true do
@@ -72,10 +72,10 @@ local Window = ArrayField:CreateWindow({
    end,
 })
 
-local Toggle = Main:CreateToggle({
+local ToggleBuild = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
-   Flag = "Toggle1",
+   Flag = "ToggleBuild",
    Callback = function(Value)
       getgenv().AutoBuild = Value
 
@@ -85,13 +85,14 @@ local Toggle = Main:CreateToggle({
             if v.ClassName == "TouchInterest" and v.Parent.ClassName == "Part" then
                local part = v.Parent
                part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-               tycoon.Build.Collect.Part.CanCollide = false
-               v.Transparency = 0.8
+               part.CanCollide = false
+               part.Transparency = 0.8
             end
          end
       end
    end,
 })
+
 
 
 
