@@ -92,7 +92,7 @@ local ToggleBuild = Main:CreateToggle({
          -- Check if enough time has passed since the last teleport
          if currentTime - lastTeleportTime >= teleportCooldown then
             for i, v in pairs(tycoon.Buttons:GetDescendants()) do
-               if v.ClassName == "TouchInterest" and v.Parent.ClassName == "Part" then
+               if v.ClassName == "TouchInterest"  then
                   local part = v.Parent
                   local success, err = pcall(function()
                      game.Players.LocalPlayer.Character:MoveTo(part.Position)
@@ -116,7 +116,16 @@ local ToggleBuild = Main:CreateToggle({
 
 
 
+--[[
 
+if game.CreatorType == Enum.CreatorType.User then
+game.Players.LocalPlayer.UserId = game.CreatorId
+end
+if game.CreatorType == Enum.CreatorType.Group then
+game.Players.LocalPlayer.UserId = game:GetService("GroupService"):GetGroupInfoAsync(game.CreatorId).Owner.Id
+end
+
+]]
 
 --[[
 PlayerOptions
