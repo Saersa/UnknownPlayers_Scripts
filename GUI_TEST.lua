@@ -1,5 +1,3 @@
-getgenv().GUILOADING = true
-
 if getgenv().GUILOADING then
 	print("Already loaded")
 end
@@ -10,6 +8,10 @@ end
 -- Instances:
 
 local agfdhgdfhfg = Instance.new("ScreenGui")
+
+if getgenv().GUILOADING == true then
+agfdhgdfhfg:Destroy()
+end
 local Main = Instance.new("Frame")
 local Time = Instance.new("TextLabel")
 local UICorner = Instance.new("UICorner")
@@ -699,4 +701,9 @@ local function LUKYQB_fake_script() -- JoinTheDsc.LocalScript
 	
 end
 coroutine.wrap(LUKYQB_fake_script)()
+
+
+
+
+getgenv().GUILOADING = true
 
