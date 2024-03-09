@@ -78,7 +78,6 @@ local Window = ArrayField:CreateWindow({
 })
 
 
-
 local Toggle = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
@@ -105,21 +104,26 @@ local Toggle = Main:CreateToggle({
          
          -- Get all children under game:GetService("Workspace").Tycoons.Red.Buttons
          local buttonContainer = tycoon.Buttons
-         for index, waypoint in pairs(buttonContainer:GetChildren()) do
-            table.insert(waypoints, {index = index, waypoint = waypoint})
+         for _, model in pairs(buttonContainer:GetChildren()) do
+            if model:IsA("Model") then
+               for _, part in pairs(model:GetDescendants()) do
+                  if part:IsA("BasePart") then
+                     table.insert(waypoints, {part = part})
+                  end
+               end
+            end
          end
          
          -- Sort waypoints based on index
          table.sort(waypoints, function(a, b) return a.index < b.index end)
          
          -- Move to each sorted waypoint
-         for _, sortedWaypoint in ipairs(waypoints) do
-            moveToWaypoint(sortedWaypoint.waypoint)
+         for _, waypoint in ipairs(waypoints) do
+            moveToWaypoint(waypoint.part)
          end
       end
    end,
 })
-
 
 
 
@@ -167,3 +171,11 @@ Main
    Auto Buy Buttons
    Auto Rebirth
 ]]
+
+
+
+
+
+
+
+-- loadstring(game:HttpGet(('https://raw.githubusercontent.com/Doran342545345/Dorans-Test-SCripts/main/Factory_Tycoon.lua'),true))()
