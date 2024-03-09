@@ -34,6 +34,8 @@ for _,v in pairs(game:GetService("Workspace").Tycoons:GetDescendants()) do
       print(tycoon)
    end
 end
+
+
 -----------//  GUI  \\-----------
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -204,7 +206,7 @@ local Toggle = Main:CreateToggle({
    CurrentValue = false,
    Flag = "Toggle1",
    Callback = function(Value)
-      getgenv().blockConveyors = Value
+      getgenv().blockConveyors = true
 
       -- Function to create a blocking part above the conveyor
       local function createBlockingPart(conveyor)
@@ -215,23 +217,25 @@ local Toggle = Main:CreateToggle({
          blockingPart.CanCollide = true
          blockingPart.Parent = game.Workspace
       end
-
+      
       -- Function to remove blocking parts
       local function removeBlockingParts()
          for _, blockingPart in pairs(game.Workspace:GetChildren()) do
+            wait()
             if blockingPart.Name == "BlockingPart" then
                blockingPart:Destroy()
             end
          end
       end
-
+      
       -- Function to block conveyors
       local function blockConveyors()
          while getgenv().blockConveyors do
             for i = 1, 30 do
+               wait()
                local conveyorName = "Conveyor" .. i
-               local conveyor = tycoon:FindFirstChild(conveyorName)
-
+               local conveyor = tycoon:GetChildren(conveyorName)
+      
                if conveyor then
                   createBlockingPart(conveyor)
                end
@@ -239,14 +243,16 @@ local Toggle = Main:CreateToggle({
             wait(1)  -- Adjust the wait time as needed
          end
       end
-
+      
       -- Remove blocking parts when the script is disabled
       if not getgenv().blockConveyors then
+         wait()
          removeBlockingParts()
       end
-
+      
       -- Run the blocking function in a coroutine to avoid blocking other parts of the script
-      coroutine.wrap(blockConveyors)()
+      blockConveyors()
+      
    end,
 })
 
