@@ -1,15 +1,33 @@
+
+--[[
+
+
+
+ _   .-')      ('-.     _ .-') _     ('-.        .-. .-')                     _ .-') _               _  .-')     ('-.         .-') _  
+( '.( OO )_   ( OO ).-.( (  OO) )  _(  OO)       \  ( OO )                   ( (  OO) )             ( \( -O )   ( OO ).-.    ( OO ) ) 
+ ,--.   ,--.) / . --. / \     .'_ (,------.       ;-----.\  ,--.   ,--.       \     .'_  .-'),-----. ,------.   / . --. /,--./ ,--,'  
+ |   `.'   |  | \-.  \  ,`'--..._) |  .---'       | .-.  |   \  `.'  /        ,`'--..._)( OO'  .-.  '|   /`. '  | \-.  \ |   \ |  |\  
+ |         |.-'-'  |  | |  |  \  ' |  |           | '-' /_).-')     /         |  |  \  '/   |  | |  ||  /  | |.-'-'  |  ||    \|  | ) 
+ |  |'.'|  | \| |_.'  | |  |   ' |(|  '--.        | .-. `.(OO  \   /          |  |   ' |\_) |  |\|  ||  |_.' | \| |_.'  ||  .     |/  
+ |  |   |  |  |  .-.  | |  |   / : |  .--'        | |  \  ||   /  /\_         |  |   / :  \ |  | |  ||  .  '.'  |  .-.  ||  |\    |   
+ |  |   |  |  |  | |  | |  '--'  / |  `---.       | '--'  /`-./  /.__)        |  '--'  /   `'  '-'  '|  |\  \   |  | |  ||  | \   |   
+ `--'   `--'  `--' `--' `-------'  `------'       `------'   `--'             `-------'      `-----' `--' '--'  `--' `--'`--'  `--'   
+
+]]
+
+
+
+
+
+
+
+
+
 -----------//  LOGIC  \\-----------
-
-local Playerhead = game.Players.LocalPlayer.Character.Head
-
 local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 local PathfindingService = game:GetService("PathfindingService")
 
 local tycoon = nil
-
-local teleportCooldown = 1
-local lastTeleportTime = 0
-
 
 for _,v in pairs(game:GetService("Workspace").Tycoons:GetDescendants()) do
    if v.ClassName == "ObjectValue" and v.Value == game.Players.LocalPlayer then
@@ -184,7 +202,6 @@ Main
    Auto Buy Buttons
    Auto Rebirth
 ]]
-
 
 
 
