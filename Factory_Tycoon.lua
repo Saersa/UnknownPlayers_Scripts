@@ -231,7 +231,7 @@ local Toggle = Main:CreateToggle({
       -- Function to block conveyors
       local function blockConveyors()
          while getgenv().blockConveyors do
-            for i = 1, 30 do
+            for i = 1, 7 do
                wait()
                local conveyorName = "Conveyor" .. i
                local conveyor = tycoon:GetChildren(conveyorName)
