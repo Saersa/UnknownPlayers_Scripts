@@ -70,7 +70,7 @@ local Window = ArrayField:CreateWindow({
        Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
     }
  })
-   local Info  = Window:CreateTab("Main Features", 4483362458)
+   local Info  = Window:CreateTab("Information", 4483362458)
    local Label = Info:CreateLabel("Auto build uses an new type of function, Pathfinding. I have never used this before and this is the first script to have it")
    local Label = Info:CreateLabel("Auto Collect is Fairly simple. Auto collects for you. Teleports the collector to you, if you disable it teleports back")
    local Label = Info:CreateLabel("Remove Ore Cant fully delete them locally cuz for some reason you wont get money no more")
@@ -196,7 +196,49 @@ local Toggle = Main:CreateToggle({
 
 print("All Loaded")
 
+local Toggle = Main:CreateToggle({
+   Name = "Block Conveyors",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      getgenv().blockConveyors = Value
 
+      -- Function to create a blocking part above the conveyor
+      -- Function to create a blocking part above the conveyor
+      local function createBlockingPart(conveyor)
+         local blockingPart = Instance.new("Part")
+         blockingPart.Size = Vector3.new(5, 0.2, 5)  -- Adjust the size as needed
+         blockingPart.Position = conveyor.Position + Vector3.new(0, 5, 0)  -- Adjust the position above the conveyor
+         blockingPart.Anchored = true
+         blockingPart.CanCollide = true
+         blockingPart.Parent = game.Workspace  -- Adjust the parent as needed
+      end
+
+      -- Function to loop through the tycoon and block conveyors
+      local function blockConveyors()
+         for i = 1, 30 do
+            local conveyorName = "Conveyor" .. i
+            local conveyor = tycoon:FindFirstChild(conveyorName)
+
+            if conveyor then
+               createBlockingPart(conveyor)
+            end
+         end
+      end
+
+      -- Main loop to continuously check and block conveyors
+      while getgenv().blockConveyors do  -- Replace with the actual name of the tycoon model
+
+            blockConveyors(tycoon)
+
+
+         wait(1)  -- Adjust the wait time as needed
+      end
+
+      
+      
+   end,
+})
 
 
 
