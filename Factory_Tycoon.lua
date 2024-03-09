@@ -117,9 +117,7 @@ local Window = ArrayField:CreateWindow({
                            end
                         else
                            -- Wait until the player can afford the item
-                           while game.Players.LocalPlayer.leaderstats.Money.Value < priceValue.Value do
-                              wait(1)
-                           end
+                           repeat wait(1) until game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value
                         end
                      end
                   end
@@ -130,12 +128,16 @@ local Window = ArrayField:CreateWindow({
          -- Move to each waypoint and wait for 2 seconds
          for _, waypoint in ipairs(waypoints) do
             moveToWaypoint(waypoint.part)
-            repeat until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
+            repeat wait() until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
             print("Moving to the next waypoint.")
+            wait(2)
          end
       end
    end,
 })
+
+print("All Loaded")
+
 
 
 print("All Loaded")
