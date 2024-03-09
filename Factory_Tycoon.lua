@@ -75,7 +75,6 @@ local Window = ArrayField:CreateWindow({
  local Main = Window:CreateTab("Main Features", 4483362458) -- Title, Image
 
 
- 
  local Toggle = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
@@ -132,11 +131,14 @@ local Window = ArrayField:CreateWindow({
          for _, waypoint in ipairs(waypoints) do
             moveToWaypoint(waypoint.part)
             repeat wait(0.1) until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
+            print("Moving to the next waypoint.")
             wait(2)
          end
       end
    end,
 })
+
+
 
 
 
