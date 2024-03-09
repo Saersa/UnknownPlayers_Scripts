@@ -95,7 +95,6 @@ local Window = ArrayField:CreateWindow({
    end,
 })
 
-
 local Toggle = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
@@ -129,16 +128,18 @@ local Toggle = Main:CreateToggle({
                   local boughtValue = model:FindFirstChild("Bought")
                   if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
                      local priceValue = model:FindFirstChild("Price")
-                     if priceValue and priceValue:IsA("IntValue") and game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
-                        for _, part in pairs(model:GetDescendants()) do
-                           if part:IsA("BasePart") then
-                              table.insert(waypoints, {part = part})
+                     if priceValue and priceValue:IsA("IntValue") then  -- Check if priceValue is not nil
+                        if game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
+                           for _, part in pairs(model:GetDescendants()) do
+                              if part:IsA("BasePart") then
+                                 table.insert(waypoints, {part = part})
+                              end
                            end
-                        end
-                     else
-                        -- Wait until the player can afford the item
-                        while game.Players.LocalPlayer.leaderstats.Money.Value < priceValue.Value do
-                           wait(1)
+                        else
+                           -- Wait until the player can afford the item
+                           while game.Players.LocalPlayer.leaderstats.Money.Value < priceValue.Value do
+                              wait(1)
+                           end
                         end
                      end
                   end
