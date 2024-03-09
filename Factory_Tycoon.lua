@@ -198,15 +198,20 @@ local Toggle = Main:CreateToggle({
 
 
 print("All Loaded")
-local function blockConveyors()
+local function disableConveyors()
    for i = 1, 7 do
       wait()
       local conveyorName = "Conveyor" .. i
       local conveyor = tycoon:FindFirstChild(conveyorName, true)
 
       if conveyor and conveyor:IsA("Model") then
-         print("Destroying", conveyorName)
-         conveyor:Destroy()
+         print("Disabling", conveyorName)
+         -- Modify the conveyor properties or scripts to make them non-functional
+         local conveyorScript = conveyor:FindFirstChild("YourScriptName") -- Change "YourScriptName" to the actual script name
+         if conveyorScript then
+            conveyorScript.Disabled = true
+         end
+         -- You may also adjust other properties based on your game's requirements
       else
          print("Conveyor not found or not a model:", conveyorName)
       end
@@ -218,7 +223,7 @@ local Toggle = Main:CreateButton({
    CurrentValue = false,
    Flag = "Button1",
    Callback = function()
-      blockConveyors()
+      disableConveyors()
    end,
 })
 
