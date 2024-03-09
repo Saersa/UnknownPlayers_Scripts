@@ -161,7 +161,7 @@ local Toggle = Main:CreateToggle({
                               if part.ClassName == "Model" and part.Name == "Button" then
                                  for _, walkToPart in pairs(part:GetChildren()) do
                                     if walkToPart.Name == "Part" then
-                                       table.insert(waypoints, {part = part})
+                                       table.insert(waypoints, {part = walkToPart})
                                     end
                                  end
                               end
