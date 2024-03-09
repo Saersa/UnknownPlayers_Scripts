@@ -86,7 +86,7 @@ local Toggle = Main:CreateToggle({
    Callback = function(Value)
       getgenv().autoBuild = Value
       local pfs = game:GetService('PathfindingService')
-      local NPC = game.Players.LocalPlayer
+      local NPC = game.Players.LocalPlayer.Character
       
       local function moveToWaypoint(waypoint)
          local path = pfs:CreatePath()
