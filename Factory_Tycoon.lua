@@ -108,28 +108,27 @@ local Toggle = Main:CreateToggle({
       getgenv().autoBuild = Value
       local pfs = game:GetService('PathfindingService')
       local NPC = game.Players.LocalPlayer.Character
-      local pathMarkers = {}  -- Table to store path marker parts
 
       local function createPathMarkers(waypoints)
+         local pathMarkers = {}
          for _, point in pairs(waypoints) do
             local sphere = Instance.new("Part")
             sphere.Transparency = 0.6
-            sphere.Color = Color3.fromRGB(255,0,0)
+            sphere.Color = Color3.fromRGB(255, 0, 0)
             sphere.Size = Vector3.new(1, 1, 1)
             sphere.Position = point.Position
             sphere.Anchored = true
             sphere.CanCollide = false
-            sphere.Parent = game.Workspace  -- Adjust the parent as needed
-
+            sphere.Parent = game.Workspace
             table.insert(pathMarkers, sphere)
          end
+         return pathMarkers
       end
 
-      local function removePathMarkers()
+      local function removePathMarkers(pathMarkers)
          for _, marker in pairs(pathMarkers) do
             marker:Destroy()
          end
-         pathMarkers = {}  -- Clear the path markers table
       end
 
       local function moveToWaypoint(waypoint)
@@ -137,107 +136,120 @@ local Toggle = Main:CreateToggle({
          path:ComputeAsync(NPC.HumanoidRootPart.Position, waypoint.Position)
          local waypoints = path:GetWaypoints()
 
-         createPathMarkers(waypoints)  -- Create path markers
-
+         local pathMarkers = createPathMarkers(waypoints)
          for _, point in pairs(waypoints) do
-            if getgenv().autoBuild then  -- Check if autoBuild is on
+            if getgenv().autoBuild then
                NPC.Humanoid:MoveTo(point.Position)
-               NPC.Humanoid.MoveToFinished:Wait()
             end
          end
-
-         removePathMarkers()  -- Remove path markers when done
+         removePathMarkers(pathMarkers)
       end
 
-      if getgenv().autoBuild then  -- Check if autoBuild is on
-         local waypoints = {}
-         
-         -- Get all children under game:GetService("Workspace").Tycoons.Red.Buttons
+      if getgenv().autoBuild then
+         local buttons = {}
          local buttonContainer = tycoon.Buttons
+
          for _, model in pairs(buttonContainer:GetChildren()) do
             if model:IsA("Model") then
                local priceValue = model:FindFirstChild("Price")
-               if priceValue and priceValue:IsA("IntValue") then  -- Check if priceValue is not nil
-                  if game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
-                     local isButtonVisible = model:FindFirstChild("IsButtonVisible")
-                     if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
-                        local boughtValue = model:FindFirstChild("Bought")
-                        if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
-                           for _, part in pairs(model:GetDescendants()) do
-                              if part.ClassName == "Model" and part.Name == "Button" then
-                                 for _, walkToPart in pairs(part:GetChildren()) do
-                                    if walkToPart.Name == "Part" then
-                                       table.insert(waypoints, {part = walkToPart})
-                                    end
+               if priceValue and priceValue:IsA("IntValue") and game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
+                  local isButtonVisible = model:FindFirstChild("IsButtonVisible")
+                  if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
+                     local boughtValue = model:FindFirstChild("Bought")
+                     if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
+                        for _, part in pairs(model:GetDescendants()) do
+                           if part.ClassName == "Model" and part.Name == "Button" then
+                              for _, walkToPart in pairs(part:GetChildren()) do
+                                 if walkToPart.Name == "Part" then
+                                    table.insert(buttons, {part = walkToPart})
                                  end
                               end
                            end
-                        else
-                           -- Wait until the player can afford the item
-                           repeat wait(1) until game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value
                         end
+                     else
+                        -- Wait until the player can afford the item
+                        repeat wait(1) until game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value
                      end
                   end
                end
             end
          end
-         
-         -- Move to each waypoint and wait for 2 seconds
-         for _, waypoint in ipairs(waypoints) do
-            moveToWaypoint(waypoint.part)
-            repeat wait() until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
-            print("Moving to the next waypoint.")
-            wait(2)
+
+         local coroutines = {}
+         for _, button in ipairs(buttons) do
+            table.insert(coroutines, coroutine.create(moveToWaypoint))
+         end
+
+         while #coroutines > 0 do
+            for i, co in ipairs(coroutines) do
+               local status, err = coroutine.resume(co, buttons[i].part)
+               if not status then
+                  warn("Coroutine error:", err)
+                  table.remove(coroutines, i)
+               elseif coroutine.status(co) == "dead" then
+                  table.remove(coroutines, i)
+               end
+            end
+            wait()
          end
       end
    end,
 })
+
 
 print("All Loaded")
 
 local Toggle = Main:CreateToggle({
    Name = "Block Conveyors",
    CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "Toggle1",
    Callback = function(Value)
       getgenv().blockConveyors = Value
 
       -- Function to create a blocking part above the conveyor
-      -- Function to create a blocking part above the conveyor
       local function createBlockingPart(conveyor)
          local blockingPart = Instance.new("Part")
-         blockingPart.Size = Vector3.new(5, 0.2, 5)  -- Adjust the size as needed
-         blockingPart.Position = conveyor.Position + Vector3.new(0, 5, 0)  -- Adjust the position above the conveyor
+         blockingPart.Size = Vector3.new(5, 0.2, 5)
+         blockingPart.Position = conveyor.Position + Vector3.new(0, 5, 0)
          blockingPart.Anchored = true
          blockingPart.CanCollide = true
-         blockingPart.Parent = game.Workspace  -- Adjust the parent as needed
+         blockingPart.Parent = game.Workspace
       end
 
-      -- Function to loop through the tycoon and block conveyors
-      local function blockConveyors()
-         for i = 1, 30 do
-            local conveyorName = "Conveyor" .. i
-            local conveyor = tycoon:FindFirstChild(conveyorName)
-
-            if conveyor then
-               createBlockingPart(conveyor)
+      -- Function to remove blocking parts
+      local function removeBlockingParts()
+         for _, blockingPart in pairs(game.Workspace:GetChildren()) do
+            if blockingPart.Name == "BlockingPart" then
+               blockingPart:Destroy()
             end
          end
       end
 
-      -- Main loop to continuously check and block conveyors
-      while getgenv().blockConveyors do  -- Replace with the actual name of the tycoon model
+      -- Function to block conveyors
+      local function blockConveyors()
+         while getgenv().blockConveyors do
+            for i = 1, 30 do
+               local conveyorName = "Conveyor" .. i
+               local conveyor = tycoon:FindFirstChild(conveyorName)
 
-            blockConveyors(tycoon)
-
-
-         wait(1)  -- Adjust the wait time as needed
+               if conveyor then
+                  createBlockingPart(conveyor)
+               end
+            end
+            wait(1)  -- Adjust the wait time as needed
+         end
       end
 
-      
-      
+      -- Remove blocking parts when the script is disabled
+      if not getgenv().blockConveyors then
+         removeBlockingParts()
+      end
+
+      -- Run the blocking function in a coroutine to avoid blocking other parts of the script
+      coroutine.wrap(blockConveyors)()
    end,
 })
+
 
 
 
