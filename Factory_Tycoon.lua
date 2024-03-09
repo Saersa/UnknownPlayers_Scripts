@@ -198,57 +198,25 @@ local Toggle = Main:CreateToggle({
 
 
 print("All Loaded")
-local Toggle = Main:CreateToggle({
+local Toggle = Main:CreateButton({
    Name = "Block Conveyors",
    CurrentValue = false,
-   Flag = "Toggle1",
-   Callback = function(Value)
-      getgenv().blockConveyors = Value
-
-      -- Function to create a blocking part above the conveyor
-      local function createBlockingPart(conveyor)
-         local blockingPart = Instance.new("Part")
-         blockingPart.Size = Vector3.new(5, 0.2, 5)
-         blockingPart.Position = conveyor.Position + Vector3.new(0, 5, 0)
-         blockingPart.Anchored = true
-         blockingPart.CanCollide = true
-         blockingPart.Parent = game.Workspace
-      end
+   Flag = "Button1",
+   Callback = function()
       
-      -- Function to remove blocking parts
-      local function removeBlockingParts()
-         for _, blockingPart in pairs(game.Workspace:GetChildren()) do
-            wait()
-            if blockingPart.Name == "BlockingPart" then
-               blockingPart:Destroy()
-            end
-         end
-      end
-      
-      -- Function to block conveyors
       local function blockConveyors()
-         while getgenv().blockConveyors do
             for i = 1, 7 do
                wait()
                local conveyorName = "Conveyor" .. i
                local conveyor = tycoon:FindFirstChild(conveyorName)  -- Use FindFirstChild instead of GetChildren
                
                if conveyor and conveyor:IsA("Model") then
-                  createBlockingPart(conveyor)
+                  conveyor:Destroy()
                end
             end
-            wait(1)  -- Adjust the wait time as needed
          end
-      end
-      
-      -- Remove blocking parts when the script is disabled
-      if not getgenv().blockConveyors then
-         wait()
-         removeBlockingParts()
-      end
-      
-      -- Run the blocking function in a coroutine to avoid blocking other parts of the script
-      blockConveyors()
+
+         blockConveyors()
    end,
 })
 
