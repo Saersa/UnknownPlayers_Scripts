@@ -70,7 +70,10 @@ local Window = ArrayField:CreateWindow({
        Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
     }
  })
-
+ local Info  = Window:CreateTab("Main Features", 4483362458)
+ local Paragraph = Info:CreateParagraph({Title = "Auto Build", Content = "Auto build uses an new type of function, Pathfinding. I have never used this before and this is the first script to have it"})
+local Paragraph = Info:CreateParagraph({Title = "Auto Collect", Content = "Fairly simple. Auto collects for you. Teleports the collector to you, if you disable it teleports back"})
+local Paragraph = Info:CreateParagraph({Title = "Remove Ores", Content = "Cant fully delete them locally cuz for some reason you wont get money no more"})
  local Main = Window:CreateTab("Main Features", 4483362458) -- Title, Image
 
 
