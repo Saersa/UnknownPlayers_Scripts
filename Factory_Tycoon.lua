@@ -114,16 +114,14 @@ local Toggle = Main:CreateToggle({
             end
          end
          
-         -- Sort waypoints based on index
-         table.sort(waypoints, function(a, b) return a.index < b.index end)
-         
-         -- Move to each sorted waypoint
+         -- Move to each waypoint
          for _, waypoint in ipairs(waypoints) do
             moveToWaypoint(waypoint.part)
          end
       end
    end,
 })
+
 
 
 
