@@ -1,4 +1,4 @@
-getgenv().toggleESP = false
+getgenv().toggleESP = true
 getgenv().colorESP = Color3.fromRGB(119, 190, 110)
 
 local function updateESP()
