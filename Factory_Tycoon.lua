@@ -3,6 +3,7 @@
 local Playerhead = game.Players.LocalPlayer.Character.Head
 
 local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local PathfindingService = game:GetService("PathfindingService")
 
 local tycoon = nil
 
@@ -77,41 +78,50 @@ local Window = ArrayField:CreateWindow({
 })
 
 
-local ToggleBuild = Main:CreateToggle({
+
+local Toggle = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
-   Flag = "ToggleBuild",
+   Flag = "Toggle1",
    Callback = function(Value)
-      getgenv().AutoBuild = Value
-
-      while getgenv().AutoBuild == true do
-         wait()
-
-         local currentTime = tick()
-
-         -- Check if enough time has passed since the last teleport
-         if currentTime - lastTeleportTime >= teleportCooldown then
-            for i, v in pairs(tycoon.Buttons:GetDescendants()) do
-               if v.ClassName == "TouchInterest"  then
-                  local part = v.Parent
-                  local success, err = pcall(function()
-                     game.Players.LocalPlayer.Character:MoveTo(part.Position)
-                  end)
-
-                  if not success then
-                     warn("Teleportation failed:", err)
-                  else
-                     part.CanCollide = false
-                     part.Transparency = 0.8
-                     lastTeleportTime = currentTime  -- Update the last teleport time
-                     wait(teleportCooldown)  -- Wait for the cooldown
-                  end
-               end
+      getgenv().autoBuild = Value
+      local pfs = game:GetService('PathfindingService')
+      local NPC = game.Players.LocalPlayer
+      
+      local function moveToWaypoint(waypoint)
+         local path = pfs:CreatePath()
+         path:ComputeAsync(NPC.HumanoidRootPart.Position, waypoint.Position)
+      
+         for _, point in pairs(path:GetWaypoints()) do
+            if getgenv().autoBuild then  -- Check if autoBuild is on
+               NPC.Humanoid:MoveTo(point.Position)
+               NPC.Humanoid.MoveToFinished:Wait()
             end
+         end
+      end
+      
+      if getgenv().autoBuild then  -- Check if autoBuild is on
+         local waypoints = {}
+         
+         -- Get all children under game:GetService("Workspace").Tycoons.Red.Buttons
+         local buttonContainer = tycoon.Buttons
+         for index, waypoint in pairs(buttonContainer:GetChildren()) do
+            table.insert(waypoints, {index = index, waypoint = waypoint})
+         end
+         
+         -- Sort waypoints based on index
+         table.sort(waypoints, function(a, b) return a.index < b.index end)
+         
+         -- Move to each sorted waypoint
+         for _, sortedWaypoint in ipairs(waypoints) do
+            moveToWaypoint(sortedWaypoint.waypoint)
          end
       end
    end,
 })
+
+
+
 
 
 local function clearOres()
