@@ -95,7 +95,7 @@ local Window = ArrayField:CreateWindow({
    end,
 })
 
- local Toggle = Main:CreateToggle({
+local Toggle = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
    Flag = "Toggle1",
@@ -103,19 +103,45 @@ local Window = ArrayField:CreateWindow({
       getgenv().autoBuild = Value
       local pfs = game:GetService('PathfindingService')
       local NPC = game.Players.LocalPlayer.Character
-      
+      local pathMarkers = {}  -- Table to store path marker parts
+
+      local function createPathMarkers(waypoints)
+         for _, point in pairs(waypoints) do
+            local sphere = Instance.new("Part")
+            sphere.Size = Vector3.new(1, 1, 1)
+            sphere.Position = point.Position
+            sphere.Anchored = true
+            sphere.CanCollide = false
+            sphere.Parent = game.Workspace  -- Adjust the parent as needed
+
+            table.insert(pathMarkers, sphere)
+         end
+      end
+
+      local function removePathMarkers()
+         for _, marker in pairs(pathMarkers) do
+            marker:Destroy()
+         end
+         pathMarkers = {}  -- Clear the path markers table
+      end
+
       local function moveToWaypoint(waypoint)
          local path = pfs:CreatePath()
          path:ComputeAsync(NPC.HumanoidRootPart.Position, waypoint.Position)
-      
-         for _, point in pairs(path:GetWaypoints()) do
+         local waypoints = path:GetWaypoints()
+
+         createPathMarkers(waypoints)  -- Create path markers
+
+         for _, point in pairs(waypoints) do
             if getgenv().autoBuild then  -- Check if autoBuild is on
                NPC.Humanoid:MoveTo(point.Position)
                NPC.Humanoid.MoveToFinished:Wait()
             end
          end
+
+         removePathMarkers()  -- Remove path markers when done
       end
-      
+
       if getgenv().autoBuild then  -- Check if autoBuild is on
          local waypoints = {}
          
@@ -158,9 +184,6 @@ local Window = ArrayField:CreateWindow({
 
 print("All Loaded")
 
-
-
-print("All Loaded")
 
 
 
