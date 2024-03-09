@@ -36,8 +36,8 @@ for _,v in pairs(game:GetService("Workspace").Tycoons:GetDescendants()) do
 end
 -----------//  GUI  \\-----------
 
-local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source.lua'))()
-local Window = ArrayField:CreateWindow({
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Window = Rayfield:CreateWindow({
     Name = gamename, -- The ScriptName
     LoadingTitle = gamename, -- The loading title for the name. Keep it gamename
     LoadingSubtitle = "by Doran",
@@ -187,7 +187,6 @@ local Toggle = Main:CreateToggle({
             moveToWaypoint(waypoint.part)
             repeat wait() until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
             print("Moving to the next waypoint.")
-            removePathMarkers()
             wait(2)
          end
       end
