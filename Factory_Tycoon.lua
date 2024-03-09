@@ -203,22 +203,22 @@ local Toggle = Main:CreateButton({
    CurrentValue = false,
    Flag = "Button1",
    Callback = function()
-      
       local function blockConveyors()
-            for i = 1, 7 do
-               wait()
-               local conveyorName = "Conveyor" .. i
-               local conveyor = tycoon:FindFirstChild(conveyorName)  -- Use FindFirstChild instead of GetChildren
-               
-               if conveyor and conveyor:IsA("Model") then
-                  conveyor:Destroy()
-               end
+         for i = 1, 7 do
+            wait()
+            local conveyorName = "Conveyor" .. i
+            local conveyor = tycoon:FindFirstChild(conveyorName)  -- Use FindFirstChild instead of GetChildren
+            
+            if conveyor and conveyor:IsA("Model") then
+               conveyor:Destroy()
             end
          end
+      end
 
-         blockConveyors()
+      blockConveyors()
    end,
 })
+
 
 
 
