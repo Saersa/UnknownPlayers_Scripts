@@ -149,13 +149,13 @@ local Toggle = Main:CreateToggle({
          local buttonContainer = tycoon.Buttons
          for _, model in pairs(buttonContainer:GetChildren()) do
             if model:IsA("Model") then
-               local isButtonVisible = model:FindFirstChild("IsButtonVisible")
-               if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
-                  local boughtValue = model:FindFirstChild("Bought")
-                  if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
-                     local priceValue = model:FindFirstChild("Price")
-                     if priceValue and priceValue:IsA("IntValue") then  -- Check if priceValue is not nil
-                        if game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
+               local priceValue = model:FindFirstChild("Price")
+               if priceValue and priceValue:IsA("IntValue") then  -- Check if priceValue is not nil
+                  if game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
+                     local isButtonVisible = model:FindFirstChild("IsButtonVisible")
+                     if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
+                        local boughtValue = model:FindFirstChild("Bought")
+                        if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
                            for _, part in pairs(model:GetDescendants()) do
                               if part:IsA("BasePart") then
                                  table.insert(waypoints, {part = part})
