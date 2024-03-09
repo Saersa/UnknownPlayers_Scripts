@@ -198,23 +198,26 @@ local Toggle = Main:CreateToggle({
 
 
 print("All Loaded")
+local function blockConveyors()
+   for i = 1, 7 do
+      wait()
+      local conveyorName = "Conveyor" .. i
+      local conveyor = tycoon:FindFirstChild(conveyorName, true)
+
+      if conveyor and conveyor:IsA("Model") then
+         print("Destroying", conveyorName)
+         conveyor:Destroy()
+      else
+         print("Conveyor not found or not a model:", conveyorName)
+      end
+   end
+end
+
 local Toggle = Main:CreateButton({
    Name = "Block Conveyors",
    CurrentValue = false,
    Flag = "Button1",
    Callback = function()
-      local function blockConveyors()
-         for i = 1, 7 do
-            wait()
-            local conveyorName = "Conveyor" .. i
-            local conveyor = tycoon:FindFirstChild(conveyorName)  -- Use FindFirstChild instead of GetChildren
-            
-            if conveyor and conveyor:IsA("Model") then
-               conveyor:Destroy()
-            end
-         end
-      end
-
       blockConveyors()
    end,
 })
