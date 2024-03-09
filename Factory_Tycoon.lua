@@ -108,7 +108,7 @@ local Toggle = Main:CreateToggle({
          for _, point in pairs(waypoints) do
             local sphere = Instance.new("Part")
             sphere.Transparency = 0.6
-            sphere.Color = Color3.fromRGB(255, 0, 0)
+            sphere.Color = Color3.fromRGB(255,0,0)
             sphere.Size = Vector3.new(1, 1, 1)
             sphere.Position = point.Position
             sphere.Anchored = true
@@ -135,12 +135,7 @@ local Toggle = Main:CreateToggle({
 
          for _, point in pairs(waypoints) do
             if getgenv().autoBuild then  -- Check if autoBuild is on
-               for _, part in pairs(waypoint.model:GetDescendants()) do
-                  if part:IsA("BasePart") and part.Name == "Part" then
-                     part.CFrame = CFrame.new(point.Position)
-                  end
-               end
-               NPC.Humanoid.MoveTo(point.Position)
+               NPC.Humanoid:MoveTo(point.Position)
                NPC.Humanoid.MoveToFinished:Wait()
             end
          end
@@ -162,7 +157,15 @@ local Toggle = Main:CreateToggle({
                      if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
                         local boughtValue = model:FindFirstChild("Bought")
                         if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
-                           table.insert(waypoints, {model = model})
+                           for _, part in pairs(model:GetDescendants()) do
+                              if part.ClassName == "Model" and part.Name == "Button" then
+                                 for _, walkToPart in pairs(part:GetChildren()) do
+                                    if walkToPart.Name == "Part" then
+                                       table.insert(waypoints, {part = part})
+                                    end
+                                 end
+                              end
+                           end
                         else
                            -- Wait until the player can afford the item
                            repeat wait(1) until game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value
@@ -175,8 +178,8 @@ local Toggle = Main:CreateToggle({
          
          -- Move to each waypoint and wait for 2 seconds
          for _, waypoint in ipairs(waypoints) do
-            moveToWaypoint(waypoint)
-            repeat wait() until (NPC.HumanoidRootPart.Position - waypoint.model.PrimaryPart.Position).Magnitude < 3 -- Adjust the threshold distance as needed
+            moveToWaypoint(waypoint.part)
+            repeat wait() until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
             print("Moving to the next waypoint.")
             removePathMarkers()
             wait(2)
@@ -186,7 +189,6 @@ local Toggle = Main:CreateToggle({
 })
 
 print("All Loaded")
-
 
 
 
