@@ -12,7 +12,6 @@ local function updateESP()
                     if not Outline then
                         Outline = Instance.new("Highlight")
                         Outline.Parent = object
-                        Outline.FillColor = getgenv().colorESP
                     end
 
                     if not nameLabel then
@@ -20,16 +19,17 @@ local function updateESP()
                         nameLabel.Parent = object
                         nameLabel.Name = "NameLabel"
                         nameLabel.BackgroundTransparency = 1
-                        nameLabel.Text = player.Name
-                        nameLabel.Position = UDim2.new(0, 0, -20, 0) 
-                        nameLabel.Size = UDim2.new(0, 100, 0, 20) 
+                        nameLabel.Position = UDim2.new(0, 0, -20, 0) -- Adjust the position as needed
+                        nameLabel.Size = UDim2.new(0, 100, 0, 20) -- Adjust the size as needed
                         nameLabel.Font = Enum.Font.SourceSans
                         nameLabel.TextSize = 14
                         nameLabel.TextColor3 = Color3.new(1, 1, 1)
                         nameLabel.TextStrokeTransparency = 0.5
-                    else
-                        nameLabel.Text = player.Name
                     end
+
+                    -- Instantly update the color
+                    Outline.FillColor = getgenv().colorESP
+                    nameLabel.Text = player.Name
                 end
             end
         end
@@ -37,6 +37,7 @@ local function updateESP()
         wait(1)
     end
 
+    -- Clean up all highlights when toggleESP is false
     for _, object in pairs(workspace:GetChildren()) do
         local Outline = object:FindFirstChild("Highlight")
         local nameLabel = object:FindFirstChild("NameLabel")
@@ -50,8 +51,6 @@ local function updateESP()
         end
     end
 end
-updateESP()
-
 
 game.Players.PlayerAdded:Connect(function(player)
     player.CharacterAdded:Connect(function()
@@ -66,3 +65,5 @@ game.Players.PlayerRemoving:Connect(function(player)
         updateESP()
     end
 end)
+
+updateESP()
