@@ -106,9 +106,23 @@ local Toggle = Main:CreateToggle({
          local buttonContainer = tycoon.Buttons
          for _, model in pairs(buttonContainer:GetChildren()) do
             if model:IsA("Model") then
-               for _, part in pairs(model:GetDescendants()) do
-                  if part:IsA("BasePart") then
-                     table.insert(waypoints, {part = part})
+               local isButtonVisible = model:FindFirstChild("IsButtonVisible")
+               if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
+                  local boughtValue = model:FindFirstChild("Bought")
+                  if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
+                     local priceValue = model:FindFirstChild("Price")
+                     if priceValue and priceValue:IsA("IntValue") and game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
+                        for _, part in pairs(model:GetDescendants()) do
+                           if part:IsA("BasePart") then
+                              table.insert(waypoints, {part = part})
+                           end
+                        end
+                     else
+                        -- Wait until the player can afford the item
+                        while game.Players.LocalPlayer.leaderstats.Money.Value < priceValue.Value do
+                           wait(1)
+                        end
+                     end
                   end
                end
             end
@@ -121,6 +135,7 @@ local Toggle = Main:CreateToggle({
       end
    end,
 })
+
 
 
 
