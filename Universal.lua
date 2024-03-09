@@ -2,6 +2,7 @@
 -----------//  LOGIC  \\-----------
 
 
+
 local updatePlayercount = false
 
 local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
@@ -12,6 +13,7 @@ for i,v in pairs(game.Players:GetChildren()) do
     playeramount += 1
     print(v.Name.." is player "..playeramount)
 end
+
 
 
 game.Players.PlayerAdded:Connect(function(plr)
@@ -90,6 +92,7 @@ local Window = ArrayField:CreateWindow({
 
 
  local Main = Window:CreateTab("Main", 7539983780) -- Title, Image
+ local Visuals = Window:CreateTab("Visuals", 16313704996) 
  local PlayerOptions = Window:CreateTab("Player", 16313704996) 
  local BadPC = Window:CreateTab("Bad Device", 16313704996) 
 
@@ -143,8 +146,106 @@ local Button = Main:CreateButton({
  })
 
 
+-----------//  Visuals  \\-----------
 
- 
+getgenv().toggleESP = false
+getgenv().colorESP = Color3.fromRGB(255, 0, 0)
+
+local function updateESP()
+    while getgenv().toggleESP do
+        for _, player in pairs(game.Players:GetPlayers()) do
+            for _, object in pairs(workspace:GetChildren()) do
+                if player.Name == object.Name then
+                    local Outline = object:FindFirstChild("Highlight")
+                    local nameLabel = object:FindFirstChild("NameLabel")
+
+                    if not Outline then
+                        Outline = Instance.new("Highlight")
+                        Outline.Parent = object
+                    end
+
+                    if not nameLabel then
+                        nameLabel = Instance.new("TextLabel")
+                        nameLabel.Parent = object
+                        nameLabel.Name = "NameLabel"
+                        nameLabel.BackgroundTransparency = 1
+                        nameLabel.Position = UDim2.new(0, 0, -20, 0) -- Adjust the position as needed
+                        nameLabel.Size = UDim2.new(0, 100, 0, 20) -- Adjust the size as needed
+                        nameLabel.Font = Enum.Font.SourceSans
+                        nameLabel.TextSize = 14
+                        nameLabel.TextColor3 = Color3.new(1, 1, 1)
+                        nameLabel.TextStrokeTransparency = 0.5
+                    end
+
+                    -- Instantly update the color
+                    Outline.FillColor = getgenv().colorESP
+                    nameLabel.Text = player.Name
+                end
+            end
+        end
+
+        wait(1)
+    end
+
+    -- Clean up all highlights when toggleESP is false
+    for _, object in pairs(workspace:GetChildren()) do
+        local Outline = object:FindFirstChild("Highlight")
+        local nameLabel = object:FindFirstChild("NameLabel")
+
+        if Outline then
+            Outline:Destroy()
+        end
+
+        if nameLabel then
+            nameLabel:Destroy()
+        end
+    end
+end
+
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function()
+        if getgenv().toggleESP then
+            updateESP()
+        end
+    end)
+end)
+
+game.Players.PlayerRemoving:Connect(function(player)
+    if getgenv().toggleESP then
+        updateESP()
+    end
+end)
+
+local Toggle = Visuals:CreateToggle({
+    Name = "ESP",
+    CurrentValue = false,
+    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        getgenv().toggleESP = Value
+
+        while getgenv().toggleESP == true do
+            wait()
+            updateESP()
+
+        end
+    end,
+ })
+
+
+local ColorPicker = Visuals:CreateColorPicker({
+    Name = "ESP Colour",
+    Color = Color3.fromRGB(255, 0, 0),
+    Flag = "ColorPicker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        getgenv().colorESP = Value
+    end
+})
+
+
+
+
+
+
 -----------//  PlayerOptions  \\-----------
  
  local servHopper = PlayerOptions:CreateButton({
@@ -216,75 +317,47 @@ local TextureRemover = BadPC:CreateButton({
 
          wait(3)
 
-         local ToDisable = {
-            Textures = true,
-            VisualEffects = true,
-            Parts = true,
-            Particles = true,
-            Sky = true
-        }
-        
-        local ToEnable = {
-            FullBright = false
-        }
-        
-        local Stuff = {}
-        
-        for _, v in next, game:GetDescendants() do
-            if ToDisable.Parts then
-                if v:IsA("Part") or v:IsA("Union") or v:IsA("BasePart") then
-                    v.Material = Enum.Material.SmoothPlastic
-                    table.insert(Stuff, 1, v)
-                end
-            end
-            
-            if ToDisable.Particles then
-                if v:IsA("ParticleEmitter") or v:IsA("Smoke") or v:IsA("Explosion") or v:IsA("Sparkles") or v:IsA("Fire") then
-                    v.Enabled = false
-                    table.insert(Stuff, 1, v)
-                end
-            end
-            
-            if ToDisable.VisualEffects then
-                if v:IsA("BloomEffect") or v:IsA("BlurEffect") or v:IsA("DepthOfFieldEffect") or v:IsA("SunRaysEffect") then
-                    v.Enabled = false
-                    table.insert(Stuff, 1, v)
-                end
-            end
-            
-            if ToDisable.Textures then
-                if v:IsA("Decal") or v:IsA("Texture") then
-                    v.Texture = ""
-                    table.insert(Stuff, 1, v)
-                end
-            end
-            
-            if ToDisable.Sky then
-                if v:IsA("Sky") then
-                    v.Parent = nil
-                    table.insert(Stuff, 1, v)
-                end
-            end
-        end
-        
-        
-        for i, v in next, ToDisable do
-            print(tostring(i)..": "..tostring(v))
-        end
-        
-        if ToEnable.FullBright then
-            local Lighting = game:GetService("Lighting")
-            
-            Lighting.FogColor = Color3.fromRGB(255, 255, 255)
-            Lighting.FogEnd = math.huge
-            Lighting.FogStart = math.huge
-            Lighting.Ambient = Color3.fromRGB(255, 255, 255)
-            Lighting.Brightness = 5
-            Lighting.ColorShift_Bottom = Color3.fromRGB(255, 255, 255)
-            Lighting.ColorShift_Top = Color3.fromRGB(255, 255, 255)
-            Lighting.OutdoorAmbient = Color3.fromRGB(255, 255, 255)
-            Lighting.Outlines = true
-        end
+        workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
+        workspace:FindFirstChildOfClass('Terrain').WaterWaveSpeed = 0
+        workspace:FindFirstChildOfClass('Terrain').WaterReflectance = 0
+        workspace:FindFirstChildOfClass('Terrain').WaterTransparency = 0
+        game:GetService("Lighting").GlobalShadows = false
+        game:GetService("Lighting").FogEnd = 9e9
+        settings().Rendering.QualityLevel = 1
+        for i, v in pairs(game:GetDescendants()) do
+            if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or
+                            v:IsA("TrussPart") then
+                            v.Material = "Plastic"
+                            v.Reflectance = 0
+                        elseif v:IsA("Decal") then
+                            v.Transparency = 1
+                        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                            v.Lifetime = NumberRange.new(0)
+                        elseif v:IsA("Explosion") then
+                            v.BlastPressure = 1
+                            v.BlastRadius = 1
+                        end
+                        end
+                        for i, v in pairs(game:GetService("Lighting"):GetDescendants()) do
+                            if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or
+                                v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
+                                v.Enabled = false
+                            end
+                        end
+                        workspace.DescendantAdded:Connect(function(child)
+                            coroutine.wrap(function()
+                                if child:IsA('ForceField') then
+                                    game:GetService('RunService').Heartbeat:Wait()
+                                    child:Destroy()
+                                elseif child:IsA('Sparkles') then
+                                    game:GetService('RunService').Heartbeat:Wait()
+                                    child:Destroy()
+                                elseif child:IsA('Smoke') or child:IsA('Fire') then
+                                    game:GetService('RunService').Heartbeat:Wait()
+                                    child:Destroy()
+                                end
+                            end)()
+                        end)
 
     end,
  })
