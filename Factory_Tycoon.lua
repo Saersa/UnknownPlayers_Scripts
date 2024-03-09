@@ -176,6 +176,7 @@ local Toggle = Main:CreateToggle({
             moveToWaypoint(waypoint.part)
             repeat wait() until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
             print("Moving to the next waypoint.")
+            removePathMarkers()
             wait(2)
          end
       end
