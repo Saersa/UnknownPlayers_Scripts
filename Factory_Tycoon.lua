@@ -75,27 +75,8 @@ local Window = ArrayField:CreateWindow({
  local Main = Window:CreateTab("Main Features", 4483362458) -- Title, Image
 
 
+ 
  local Toggle = Main:CreateToggle({
-   Name = "Auto Collect",
-   CurrentValue = false,
-   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-   Callback = function(Value)
-      getgenv().AutoCollect = Value
-      while getgenv().AutoCollect == false do
-         wait()
-         tycoon.Build.Collect.Part.CFrame = CFrame.new(tycoon.Build.Collect.Union.Position)
-         tycoon.Build.Collect.Part.Transparency = 0
-      end
-      while getgenv().AutoCollect == true do
-         wait()
-         tycoon.Build.Collect.Part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-         tycoon.Build.Collect.Part.CanCollide = false
-         tycoon.Build.Collect.Part.Transparency = 1
-      end
-   end,
-})
-
-local Toggle = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
    Flag = "Toggle1",
@@ -147,13 +128,16 @@ local Toggle = Main:CreateToggle({
             end
          end
          
-         -- Move to each waypoint
+         -- Move to each waypoint and wait for 2 seconds
          for _, waypoint in ipairs(waypoints) do
             moveToWaypoint(waypoint.part)
+            repeat wait(0.1) until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
+            wait(2)
          end
       end
    end,
 })
+
 
 
 
