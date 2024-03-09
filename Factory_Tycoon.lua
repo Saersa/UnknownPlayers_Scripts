@@ -76,6 +76,26 @@ local Window = ArrayField:CreateWindow({
 
 
  local Toggle = Main:CreateToggle({
+   Name = "Auto Collect",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+      getgenv().AutoCollect = Value
+      while getgenv().AutoCollect == false do
+         wait()
+         tycoon.Build.Collect.Part.CFrame = CFrame.new(tycoon.Build.Collect.Union.Position)
+         tycoon.Build.Collect.Part.Transparency = 0
+      end
+      while getgenv().AutoCollect == true do
+         wait()
+         tycoon.Build.Collect.Part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+         tycoon.Build.Collect.Part.CanCollide = false
+         tycoon.Build.Collect.Part.Transparency = 1
+      end
+   end,
+})
+
+ local Toggle = Main:CreateToggle({
    Name = "Auto Build",
    CurrentValue = false,
    Flag = "Toggle1",
