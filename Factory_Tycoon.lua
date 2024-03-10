@@ -196,30 +196,40 @@ local Toggle = Main:CreateToggle({
 })
 
 
+-- Assuming Main is already defined
 
-print("All Loaded")
+local tycoon = game.Workspace.Tycoons.Green -- Adjust the path based on your game's hierarchy
+
 local function disableConveyors()
    for i = 1, 7 do
       wait()
       local conveyorName = "Conveyor" .. i
-      local conveyor = tycoon:FindFirstChild(conveyorName, true)
+      local conveyorModel = tycoon.Buttons[conveyorName].Model
 
-      if conveyor and conveyor:IsA("Model") then
+      -- Find each part named "Conveyor" within the model
+      local conveyorPart1 = conveyorModel:FindFirstChild("Conveyor")
+      local conveyorPart2 = conveyorModel:FindFirstChild("Conveyor")
+
+      if conveyorPart1 and conveyorPart2 then
          print("Disabling", conveyorName)
-         -- Modify the conveyor properties or scripts to make them non-functional
-         local conveyorScript = conveyor:FindFirstChild("YourScriptName") -- Change "YourScriptName" to the actual script name
-         if conveyorScript then
-            conveyorScript.Disabled = true
-         end
+
+         -- Disable or hide the parts as needed
+         conveyorPart1.Transparency = 1
+         conveyorPart2.Transparency = 1
+         
+         -- Alternatively, you can make the parts CanCollide false
+          conveyorPart1.CanCollide = false
+          conveyorPart2.CanCollide = false
+         
          -- You may also adjust other properties based on your game's requirements
       else
-         print("Conveyor not found or not a model:", conveyorName)
+         print("Conveyor parts not found:", conveyorName)
       end
    end
 end
 
 local Toggle = Main:CreateButton({
-   Name = "Block Conveyors",
+   Name = "Disable Conveyors",
    CurrentValue = false,
    Flag = "Button1",
    Callback = function()
