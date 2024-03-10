@@ -180,7 +180,9 @@ local Toggle = Main:CreateToggle({
             until game.Players.LocalPlayer.leaderstats.Money.Value >= amt
          end
 
-         spawn(collectMoney)
+         spawn(function()
+            collectMoney(0)  -- Start collecting money immediately
+         end)
 
          -- Get all children under game:GetService("Workspace").Tycoons.Red.Buttons
          local buttonContainer = tycoon.Buttons
@@ -189,9 +191,6 @@ local Toggle = Main:CreateToggle({
                local priceValue = model:FindFirstChild("Price")
                if priceValue and priceValue:IsA("IntValue") then
                   if game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
-                  
-
-
                      local isButtonVisible = model:FindFirstChild("IsButtonVisible")
                      if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
                         local boughtValue = model:FindFirstChild("Bought")
@@ -230,6 +229,7 @@ local Toggle = Main:CreateToggle({
 
 
 
+
 -- Assuming Main is already defined
 
 local function disableConveyors()
@@ -246,8 +246,8 @@ local function disableConveyors()
          print("Disabling", conveyorName)
 
          -- Disable or hide the parts as needed
-         conveyorPart1.Transparency = 1
-         conveyorPart2.Transparency = 1
+        -- conveyorPart1.Transparency = 1
+        -- conveyorPart2.Transparency = 1
          
          -- Alternatively, you can make the parts CanCollide false
           conveyorPart1.CanCollide = false
