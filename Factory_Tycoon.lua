@@ -136,7 +136,7 @@ local Toggle = Main:CreateToggle({
          pathMarkers = {}  -- Clear the path markers table
       end
 
-      local function moveToWaypoint(waypoint)
+      local function moveToWaypoint(waypoint, requiredMoney)
          local path = pfs:CreatePath()
          path:ComputeAsync(NPC.HumanoidRootPart.Position, waypoint.Position)
          local waypoints = path:GetWaypoints()
@@ -151,12 +151,22 @@ local Toggle = Main:CreateToggle({
          end
 
          removePathMarkers()  -- Remove path markers when done
+
+         -- Check if the player has enough money for the button
+         local priceValue = waypoint:FindFirstChild("Price")
+         if priceValue and priceValue:IsA("IntValue") then
+            local playerMoney = game.Players.LocalPlayer.leaderstats.Money.Value
+            if playerMoney < priceValue.Value then
+               -- Not enough money, inform the collectMoney function
+               collectMoney(priceValue.Value - playerMoney)
+            end
+         end
       end
 
       local function jumpUpDown()
          local isJumping = false
 
-         while getgenv().autoBuild and not game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Jump do
+         while getgenv().autoBuild and not NPC:FindFirstChild("Humanoid").Jump do
             if isJumping then
                NPC.Humanoid:Move(Vector3.new(0, -5, 0))
             else
@@ -167,50 +177,36 @@ local Toggle = Main:CreateToggle({
          end
       end
 
+      local function collectMoney(amt)
+         repeat
+            wait(5)
+            -- Check if the player has enough money, if not, jump up and down
+            if game.Players.LocalPlayer.leaderstats.Money.Value < amt then
+               jumpUpDown()
+            end
+         until game.Players.LocalPlayer.leaderstats.Money.Value >= amt
+      end
+
       if getgenv().autoBuild then
          local waypoints = {}
-
-         local function collectMoney(amt)
-            repeat
-               wait(5)
-               -- Check if the player has enough money, if not, jump up and down
-               if game.Players.LocalPlayer.leaderstats.Money.Value < amt then
-                  jumpUpDown()
-               end
-            until game.Players.LocalPlayer.leaderstats.Money.Value >= amt
-         end
-
-         spawn(function()
-            collectMoney(0)  -- Start collecting money immediately
-         end)
 
          -- Get all children under game:GetService("Workspace").Tycoons.Red.Buttons
          local buttonContainer = tycoon.Buttons
          for _, model in pairs(buttonContainer:GetChildren()) do
             if model:IsA("Model") then
-               local priceValue = model:FindFirstChild("Price")
-               if priceValue and priceValue:IsA("IntValue") then
-                  if game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
-                     local isButtonVisible = model:FindFirstChild("IsButtonVisible")
-                     if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
-                        local boughtValue = model:FindFirstChild("Bought")
-                        if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
-                           for _, part in pairs(model:GetDescendants()) do
-                              if part.ClassName == "Model" and part.Name == "Button" then
-                                 for _, walkToPart in pairs(part:GetChildren()) do
-                                    if walkToPart.Name == "Part" then
-                                       table.insert(waypoints, { part = walkToPart })
-                                    end
-                                 end
+               local isButtonVisible = model:FindFirstChild("IsButtonVisible")
+               if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
+                  local boughtValue = model:FindFirstChild("Bought")
+                  if boughtValue and boughtValue:IsA("BoolValue") and not boughtValue.Value then
+                     for _, part in pairs(model:GetDescendants()) do
+                        if part.ClassName == "Model" and part.Name == "Button" then
+                           for _, walkToPart in pairs(part:GetChildren()) do
+                              if walkToPart.Name == "Part" then
+                                 table.insert(waypoints, walkToPart)
                               end
                            end
-                        else
-                           -- Wait until the player can afford the item
-                           repeat wait(1) until game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value
                         end
                      end
-                  else
-                     collectMoney(priceValue.Value)
                   end
                end
             end
@@ -218,14 +214,15 @@ local Toggle = Main:CreateToggle({
 
          -- Move to each waypoint and wait until the build is completed
          for _, waypoint in ipairs(waypoints) do
-            moveToWaypoint(waypoint.part)
-            repeat wait() until (NPC.HumanoidRootPart.Position - waypoint.part.Position).Magnitude < 3 -- Adjust the threshold distance as needed
+            moveToWaypoint(waypoint, 1000)  -- Pass a default value for required money
+            repeat wait() until (NPC.HumanoidRootPart.Position - waypoint.Position).Magnitude < 3 -- Adjust the threshold distance as needed
             print("Moving to the next waypoint.")
             wait(2)  -- Adjust the wait time before moving to the next waypoint
          end
       end
    end,
 })
+
 
 
 
