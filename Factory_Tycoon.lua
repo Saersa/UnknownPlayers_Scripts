@@ -115,6 +115,8 @@ local Toggle = Main:CreateToggle({
       local function createPathMarkers(waypoints)
          for _, point in pairs(waypoints) do
             local sphere = Instance.new("Part")
+            sphere.Shape = Enum.PartType.Ball
+            sphere.Material = Enum.Material.Neon
             sphere.Transparency = 0.6
             sphere.Color = Color3.fromRGB(255, 0, 0)
             sphere.Size = Vector3.new(1, 1, 1)
@@ -168,7 +170,7 @@ local Toggle = Main:CreateToggle({
                            for _, part in pairs(model:GetDescendants()) do
                               if part.ClassName == "Model" and part.Name == "Button" then
                                  for _, walkToPart in pairs(part:GetChildren()) do
-                                    if walkToPart.Name == "Part" then
+                                    if walkToPart:IsA("BasePart") then
                                        table.insert(waypoints, { part = walkToPart })
                                     end
                                  end
@@ -194,6 +196,7 @@ local Toggle = Main:CreateToggle({
       end
    end,
 })
+
 
 
 -- Assuming Main is already defined
