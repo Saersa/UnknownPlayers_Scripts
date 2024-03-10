@@ -153,16 +153,45 @@ local Toggle = Main:CreateToggle({
          removePathMarkers()  -- Remove path markers when done
       end
 
-      if getgenv().autoBuild then  -- Check if autoBuild is on
+      local function jumpUpDown()
+         local isJumping = false
+
+         while getgenv().autoBuild and not game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Jump do
+            if isJumping then
+               NPC.Humanoid:Move(Vector3.new(0, -5, 0))
+            else
+               NPC.Humanoid:Move(Vector3.new(0, 5, 0))
+            end
+            isJumping = not isJumping
+            wait(0.1)
+         end
+      end
+
+      if getgenv().autoBuild then
          local waypoints = {}
+
+         local function collectMoney(amt)
+            repeat
+               wait(5)
+               -- Check if the player has enough money, if not, jump up and down
+               if game.Players.LocalPlayer.leaderstats.Money.Value < amt then
+                  jumpUpDown()
+               end
+            until game.Players.LocalPlayer.leaderstats.Money.Value >= amt
+         end
+
+         spawn(collectMoney)
 
          -- Get all children under game:GetService("Workspace").Tycoons.Red.Buttons
          local buttonContainer = tycoon.Buttons
          for _, model in pairs(buttonContainer:GetChildren()) do
             if model:IsA("Model") then
                local priceValue = model:FindFirstChild("Price")
-               if priceValue and priceValue:IsA("IntValue") then  -- Check if priceValue is not nil
+               if priceValue and priceValue:IsA("IntValue") then
                   if game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value then
+                  
+
+
                      local isButtonVisible = model:FindFirstChild("IsButtonVisible")
                      if isButtonVisible and isButtonVisible:IsA("BoolValue") and isButtonVisible.Value then
                         local boughtValue = model:FindFirstChild("Bought")
@@ -170,7 +199,7 @@ local Toggle = Main:CreateToggle({
                            for _, part in pairs(model:GetDescendants()) do
                               if part.ClassName == "Model" and part.Name == "Button" then
                                  for _, walkToPart in pairs(part:GetChildren()) do
-                                    if walkToPart:IsA("BasePart") then
+                                    if walkToPart.Name == "Part" then
                                        table.insert(waypoints, { part = walkToPart })
                                     end
                                  end
@@ -181,6 +210,8 @@ local Toggle = Main:CreateToggle({
                            repeat wait(1) until game.Players.LocalPlayer.leaderstats.Money.Value >= priceValue.Value
                         end
                      end
+                  else
+                     collectMoney(priceValue.Value)
                   end
                end
             end
