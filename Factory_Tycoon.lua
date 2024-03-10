@@ -198,8 +198,6 @@ local Toggle = Main:CreateToggle({
 
 -- Assuming Main is already defined
 
-local tycoon = game.Workspace.Tycoons.Green -- Adjust the path based on your game's hierarchy
-
 local function disableConveyors()
    for i = 1, 7 do
       wait()
