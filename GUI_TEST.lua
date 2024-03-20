@@ -616,7 +616,7 @@ local function BKRONP_fake_script() -- Yes.LocalScript
 		task.wait(1.5)
 		confirm.Visible = false
 		
-		loadstring(game:HttpGet(('https://raw.githubusercontent.com/Doran342545345/Dorans-Test-SCripts/main/LoadString.lua'),true))()
+		loadstring(game:HttpGet(('https://raw.githubusercontent.com/Saersa/UnknownPlayers_Scripts/main/LoadString.lua'),true))()
 		
 	end)
 	
@@ -625,7 +625,7 @@ local function BKRONP_fake_script() -- Yes.LocalScript
 		task.wait(1.5)
 		confirm.Visible = false
 	
-		loadstring(game:HttpGet(('https://raw.githubusercontent.com/Doran342545345/Dorans-Test-SCripts/main/LoadString.lua'),true))()
+		loadstring(game:HttpGet(('https://raw.githubusercontent.com/Saersa/UnknownPlayers_Scripts/main/LoadString.lua'),true))()
 	end)
 end
 coroutine.wrap(BKRONP_fake_script)()
