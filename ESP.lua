@@ -36,7 +36,6 @@ local function updateESP()
 
         wait(1)
     end
-
     -- Clean up all highlights when toggleESP is false
     for _, object in pairs(workspace:GetChildren()) do
         local Outline = object:FindFirstChild("Highlight")
