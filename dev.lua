@@ -122,7 +122,7 @@ local Button = Teleportation:CreateButton({
 
 
 
-local Dropdown = Online:CreateDropdown({
+local playerlist1 = Online:CreateDropdown({
    Name = "Teleport",
    Options = {},
    CurrentOption = "Select a player",
@@ -141,11 +141,13 @@ local Button = Online:CreateButton({
    Interact = 'Click',
    Callback = function()
       -- Clear existing options
-      Dropdown:ClearOptions()
+      for i,v in pairs(playerlist1) do
+         playerlist1:Remove()
+      end
 
       -- Populate dropdown with player names
       for _, player in pairs(game.Players:GetPlayers()) do
-         Dropdown:AddOption(player.Name)  -- Use player object as value
+         playerlist1:AddOption(player.Name)  -- Use player object as value
       end
    end,
 })
