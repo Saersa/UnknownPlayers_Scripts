@@ -150,7 +150,7 @@ local FPS = BadPc:CreateSection(frames.." FPS")
  game:GetService('RunService').RenderStepped:Connect(function(step)
 	local fps = 1/step
 
-   frames = fps
+   frames = math.ceil(fps)
 end)
 
 
