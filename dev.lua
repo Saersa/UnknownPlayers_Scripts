@@ -147,14 +147,13 @@ local FPS = BadPc:CreateSection(frames.." FPS")
     end,
  })
 
- game:GetService('RunService').RenderStepped:Connect(function(step)
-	local fps = 1/step
-
-   frames = math.ceil(fps)
+ local frames = 0
+ local RS = game:GetService("RunService")
+RS.RenderStepped:Connect(function()
+	frames = frames + 1
 end)
 
-
- while true do
-   task.wait(1)
+while task.wait(1) do
    FPS:Set(frames.." FPS")
- end
+	frames = 0
+end
