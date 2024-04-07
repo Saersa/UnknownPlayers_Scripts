@@ -120,11 +120,12 @@ local Button = Teleportation:CreateButton({
    end,
 })
 
+local currentOptions = {}
 
 
 local playerlist1 = Online:CreateDropdown({
    Name = "Teleport",
-   Options = {},
+   Options = currentOptions,
    CurrentOption = "Select a player",
    MultiSelection = false,
    Flag = "Dropdown1",
@@ -136,25 +137,33 @@ local playerlist1 = Online:CreateDropdown({
    end,
 })
 
+-- Assuming you have a table to track the current options
+
+
 local Button = Online:CreateButton({
-   Name = "Update playerlist",
-   Interact = 'Click',
-   Callback = function()
-       local currentOptions = playerlist1:GetOptions() or {}
+    Name = "Update playerlist",
+    Interact = 'Click',
+    Callback = function()
+        -- Clear existing options
+        for _, option in ipairs(currentOptions) do
+            playerlist1:Remove(option)
+        end
 
-       for _, option in ipairs(currentOptions) do
-           playerlist1:Remove(option)
-       end
+        -- Wait a bit before adding new options
+        task.wait(0.1)
 
-       task.wait(0.1)
+        -- Add new player names as options
+        for _, player in ipairs(game.Players:GetPlayers()) do
+            local playerName = player.Name
+            playerlist1:Add(playerName)
+            table.insert(currentOptions, playerName)
+        end
 
-       for _, player in ipairs(game.Players:GetPlayers()) do
-           playerlist1:Add(player.Name)
-       end
-
-       playerlist1:Refresh(currentOptions)
-   end,
+        -- Optional: Refresh the dropdown if necessary
+        -- playerlist1:Refresh(options, selectedOption)
+    end,
 })
+
 
 
 
