@@ -129,25 +129,28 @@ local Dropdown = Online:CreateDropdown({
    MultiSelection = false,
    Flag = "Dropdown1",
    Callback = function(playerName)
+      -- Check if playerName is not just a string but an actual player object
+      if type(playerName) == "userdata" and playerName:IsA("Player") then
+         game.Players.LocalPlayer.Character:MoveTo(playerName.Character.HumanoidRootPart.Position)
+      end
+   end,
+})
 
+local Button = Online:CreateButton({
+   Name = "Update playerlist",
+   Interact = 'Click',
+   Callback = function()
+      -- Clear existing options
+      Dropdown:ClearOptions()
 
-      game.Players.LocalPlayer.Character:MoveTo(playerName.Character.HumanoidRootPart.Position)
+      -- Populate dropdown with player names
+      for _, player in pairs(game.Players:GetPlayers()) do
+         Dropdown:AddOption(player.Name, player)  -- Use player object as value
+      end
    end,
 })
 
 
-local function updateDropdownOptions()
-   -- Clear existing options
-   Dropdown:Refresh({}, "Select a player")
-   
-   -- Get updated list of players
-   local players = getPlayers()
-   
-   -- Add players to the dropdown options
-   Dropdown:Refresh(players)
-end
-game.Players.PlayerAdded:Connect(updateDropdownOptions())
-game.Players.PlayerRemoving:Connect(updateDropdownOptions())
 
 
 local Button = BadPc:CreateButton({
