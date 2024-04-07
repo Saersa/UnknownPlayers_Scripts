@@ -72,6 +72,17 @@ local Window = ArrayField:CreateWindow({
  local Online = Window:CreateTab("Online", 14294451648) -- Title, Image
  local BadPc = Window:CreateTab("Bad PC settings", 542620095) -- Title, Image
 
+ 
+ local settings = Window:CreateTab("Settings", 11385220714) -- Title, Image
+
+
+ local Button = settings:CreateButton({
+   Name = "Close GUI",
+   Interact = 'Click',
+   Callback = function()
+   ArrayField:Destroy()
+   end,
+})
 if gamename ~= name then
    warn("OUTDATED")
    ArrayField:Notify({
