@@ -66,7 +66,7 @@ local Window = ArrayField:CreateWindow({
     }
  })
 
- local Teleportation = Window:CreateTab("Teleportation", 4483362458) -- Title, Image
+ local Teleportation = Window:CreateTab("Main Features", 4483362458) -- Title, Image
  local Local = Window:CreateTab("Local", 14294451648) -- Title, Image
 
  local Online = Window:CreateTab("Online", 14294451648) -- Title, Image
