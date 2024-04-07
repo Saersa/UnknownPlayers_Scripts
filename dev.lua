@@ -153,7 +153,7 @@ local Button = Online:CreateButton({
         for _, player in ipairs(game.Players:GetPlayers()) do
             local playerName = player.Name
             playerlist1:Add(playerName)
-            table.insert(currentOptions, playerName)
+            table.insert(currentOptions,player.DisplayName.."(@"..playerName..")")
         end
 
         -- Optional: Refresh the dropdown if necessary
