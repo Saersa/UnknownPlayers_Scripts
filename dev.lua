@@ -12,8 +12,8 @@ getgenv().simpleCFrame = false
 
 local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source.lua'))()
 local Window = ArrayField:CreateWindow({
-    Name = gamename, -- The ScriptName
-    LoadingTitle = gamename, -- The loading title for the name. Keep it gamename
+    Name = gamename.."|| Dev GUI", -- The ScriptName
+    LoadingTitle = gamename.."|| Dev GUI", -- The loading title for the name. Keep it gamename
     LoadingSubtitle = "by Doran",
     ConfigurationSaving = {
        Enabled = true,
@@ -25,11 +25,11 @@ local Window = ArrayField:CreateWindow({
        Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
        RememberJoins = true -- Set this to false to make them join the discord every time they load it up
     },
-    KeySystem = false, -- Set this to true to use our key system
+    KeySystem = true, -- Set this to true to use our key system
     KeySettings = {
        Title = "Doran's ScriptHub",
        Subtitle = "Key System",
-       Note = "No method of obtaining the key is provided",
+       Note = "Join our discord for the key!",
        FileName = "Key", -- It is recommended to use something unique as other scripts using ArrayField may overwrite your key file
        SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
        GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like ArrayField to get the key from
