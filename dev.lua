@@ -141,9 +141,27 @@ local playerlist1 = Online:CreateDropdown({
    MultiSelection = false,
    Flag = "Dropdown1",
    Callback = function(playerName)
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(tostring(playerName.Character.HumanoidRootPart.CFrame))
+      if playerName and playerName.Character and playerName.Character:FindFirstChild("HumanoidRootPart") then
+         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(playerName.Character.HumanoidRootPart.CFrame.Position)
+      else
+         ArrayField:Notify({
+            Title = "Not Found",
+            Content = "Invalid player selected or player not found.",
+            Duration = 2,
+            Image = 13852169470,
+            Actions = { -- Notification Buttons
+               Ignore = {
+                  Name = "Okay!",
+                  Callback = function()
+                  print("The user tapped Okay!")
+               end
+            },
+          },
+         })
+      end
    end,
 })
+
 
 -- Assuming you have a table to track the current options
 
