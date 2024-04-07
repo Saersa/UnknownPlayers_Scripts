@@ -58,7 +58,7 @@ local Window = ArrayField:CreateWindow({
    CurrentValue = false,
    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
    Callback = function(Value)
-      getgenv.simpleCFrame  = Value
+      getgenv().simpleCFrame  = Value
    end,
 })
 
@@ -68,7 +68,7 @@ local Window = ArrayField:CreateWindow({
    Callback = function()
       if getgenv().simpleCFrame == false then
          print("Simple CFrame false")
-         setclipboard(game.Players.LocalPlayer.Character.Humanoid.HumanoidRootPart.Position)
+         setclipboard(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
       else
          setclipboard("game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new("..tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)..")")
       end
@@ -81,6 +81,9 @@ local Button = Teleportation:CreateButton({
       game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId)
    end,
 })
+
+
+
 
 
 
