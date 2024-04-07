@@ -130,10 +130,7 @@ local playerlist1 = Online:CreateDropdown({
    MultiSelection = false,
    Flag = "Dropdown1",
    Callback = function(playerName)
-      -- Check if playerName is not just a string but an actual player object
-      if type(playerName) == "userdata" and playerName:IsA("Player") then
-         game.Players.LocalPlayer.Character:MoveTo(playerName.Character.HumanoidRootPart.Position)
-      end
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(playerName.Character.HumanoidRootPart.CFrame)
    end,
 })
 
@@ -217,7 +214,7 @@ settings().Rendering.QualityLevel = 1
    end,
 })
 local frames = 0
-local FPS = BadPc:CreateSection(frames.." FPS")
+local FPS = BadPc:CreateSection(frames.." FPS",false)
 
  local Input = BadPc:CreateInput({
     Name = "FPS Amount",
