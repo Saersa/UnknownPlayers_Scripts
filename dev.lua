@@ -142,8 +142,8 @@ local Button = Online:CreateButton({
    Callback = function()
       -- Clear existing options
       for i,v in pairs(playerlist1) do
-        -- playerlist1:Remove(v)
-         print("Removed "..v)
+         playerlist1:Remove(v)
+         print("Removed "..tostring(v))
       end
 
       -- Populate dropdown with player names
