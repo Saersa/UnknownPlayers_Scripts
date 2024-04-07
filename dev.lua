@@ -144,7 +144,7 @@ local FPS = BadPc:CreateSection(frames.." FPS")
     end,
  })
 
- RunService.RenderStepped:Connect(function()
+ game:GetService('RunService').RenderStepped:Connect(function()
 	frames = frames + 1
 end)
 
