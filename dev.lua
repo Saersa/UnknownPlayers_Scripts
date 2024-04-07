@@ -133,7 +133,6 @@ local Button = Teleportation:CreateButton({
 
 local currentOptions = {}
 
-
 local playerlist1 = Online:CreateDropdown({
    Name = "Teleport",
    Options = currentOptions,
@@ -141,30 +140,29 @@ local playerlist1 = Online:CreateDropdown({
    MultiSelection = false,
    Flag = "Dropdown1",
    Callback = function(playerName)
-      if playerName and playerName.Character and playerName.Character:FindFirstChild("HumanoidRootPart") then
-         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(playerName.Character.HumanoidRootPart.CFrame.Position)
-      else
-         ArrayField:Notify({
-            Title = "Not Found",
-            Content = "Invalid player selected or player not found.",
-            Duration = 2,
-            Image = 13852169470,
-            Actions = { -- Notification Buttons
-               Ignore = {
-                  Name = "Okay!",
-                  Callback = function()
-                  print("The user tapped Okay!")
-               end
-            },
-          },
-         })
+      if playerName then
+         local player = game.Players:FindFirstChild(playerName)
+         if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.CFrame.Position)
+         else
+            ArrayField:Notify({
+               Title = "Not Found",
+               Content = "Selected player is not found or their character is unavailable.",
+               Duration = 2,
+               Image = 13852169470,
+               Actions = {
+                  Ignore = {
+                     Name = "Okay!",
+                     Callback = function()
+                        print("The user tapped Okay!")
+                     end
+                  },
+               },
+            })
+         end
       end
    end,
 })
-
-
--- Assuming you have a table to track the current options
-
 
 local Button = Online:CreateButton({
     Name = "Update playerlist",
@@ -176,23 +174,20 @@ local Button = Online:CreateButton({
         end
 
         -- Wait a bit before adding new options
-        task.wait(0.1)
+        task.wait(0.5)
 
         -- Add new player names as options
         for _, player in ipairs(game.Players:GetPlayers()) do
             local playerName = player.Name
             playerlist1:Add(playerName)
-            table.insert(currentOptions,player.DisplayName.."(@"..playerName..")")
+            table.insert(currentOptions, player.DisplayName.."(@"..playerName..")")
+            task.wait()
         end
 
-        -- Optional: Refresh the dropdown if necessary
-        -- playerlist1:Refresh(options, selectedOption)
+        -- Refresh the dropdown to reflect the changes
+        playerlist1:Refresh(currentOptions)
     end,
 })
-
-
-
-
 
 
 
