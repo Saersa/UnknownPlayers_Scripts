@@ -3,6 +3,7 @@
 local Playerhead = game.Players.LocalPlayer.Character.Head
 
 local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local RunService = game:GetService("RunService")
 
 getgenv().simpleCFrame = false
 
@@ -143,7 +144,7 @@ local FPS = BadPc:CreateSection(frames.." FPS")
     end,
  })
 
- game.RunService.RenderStepped:Connect(function()
+ RunService.RenderStepped:Connect(function()
 	frames = frames + 1
 end)
 
