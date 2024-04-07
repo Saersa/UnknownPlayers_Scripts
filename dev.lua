@@ -153,6 +153,5 @@ end)
 
  while true do
    task.wait(1)
-   --FPS:Set(frames.." FPS")
-   FPS:Set(game.Workspace:GetRealPhysicsFPS())
+   FPS:Set(frames.." FPS")
  end
