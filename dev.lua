@@ -68,7 +68,7 @@ local Window = ArrayField:CreateWindow({
    Callback = function()
       if getgenv().simpleCFrame == false then
          print("Simple CFrame false")
-         setclipboard(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
+         setclipboard(tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame))
       else
          setclipboard("game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new("..tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)..")")
       end
