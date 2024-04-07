@@ -145,7 +145,7 @@ local Button = Online:CreateButton({
 
       -- Populate dropdown with player names
       for _, player in pairs(game.Players:GetPlayers()) do
-         Dropdown:AddOption(player.Name, player)  -- Use player object as value
+         Dropdown:AddOption(player.Name)  -- Use player object as value
       end
    end,
 })
