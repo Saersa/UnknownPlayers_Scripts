@@ -7,6 +7,26 @@ local RunService = game:GetService("RunService")
 
 getgenv().simpleCFrame = false
 
+local name = "Yes"
+
+if gamename ~= name then
+   warn("OUTDATED")
+end
+
+
+
+local function getPlayers()
+   local plrlist = {}  
+   for _,v in pairs(game.Players:GetPlayers()) do  
+      table.insert(plrlist, v.Name)  
+   end
+   return plrlist  
+end
+
+
+
+
+
 
 -----------//  GUI  \\-----------
 
@@ -52,6 +72,24 @@ local Window = ArrayField:CreateWindow({
  local Online = Window:CreateTab("Online", 14294451648) -- Title, Image
  local BadPc = Window:CreateTab("Bad PC settings", 542620095) -- Title, Image
 
+if gamename ~= name then
+   warn("OUTDATED")
+   ArrayField:Notify({
+      Title = "OUTDATED",
+      Content = "My name checker is different from the current name! The script may be outdated! (testing feature)",
+      Duration = 10,
+      Image = 4483362458,
+      Actions = { -- Notification Buttons
+         Ignore = {
+            Name = "Okay!",
+            Callback = function()
+            print("The user tapped Okay!")
+         end
+      },
+    },
+   })
+end
+
  
  local Toggle = Teleportation:CreateToggle({
    Name = "Toggle Simple CFrame",
@@ -84,7 +122,49 @@ local Button = Teleportation:CreateButton({
 
 
 
+local Dropdown = Online:CreateDropdown({
+   Name = "Teleport",
+   Options = {},
+   CurrentOption = "Select a player",
+   MultiSelection = false,
+   Flag = "Dropdown1",
+   Callback = function(playerName)
+      -- Check if the selected option is not the default option
+      if playerName ~= "Select a player" then
+         -- Find the player with the selected name
+         local playerToTeleport = game.Players:FindFirstChild(playerName)
+         -- Check if the player exists and is in the game
+         if playerToTeleport and playerToTeleport:IsDescendantOf(game.Players) then
+            -- Teleport the local player to the selected player's character
+            game.Players.LocalPlayer.Character:MoveTo(playerToTeleport.Character.HumanoidRootPart.Position)
+         else
+            warn("Player not found or not in the game.")
+         end
+      end
+   end,
+})
 
+local function updateDropdownOptions()
+   -- Clear existing options
+   Dropdown:ClearOptions()
+   -- Add names of all players to the options
+   for _, player in ipairs(game.Players:GetPlayers()) do
+      Dropdown:AddOption(player.Name)
+   end
+end
+
+-- Update dropdown options when a player joins
+game.Players.PlayerAdded:Connect(function(player)
+   Dropdown:AddOption(player.Name)
+end)
+
+-- Update dropdown options when a player leaves
+game.Players.PlayerRemoving:Connect(function(player)
+   Dropdown:RemoveOption(player.Name)
+end)
+
+-- Initial update of options
+updateDropdownOptions()
 
 
 
