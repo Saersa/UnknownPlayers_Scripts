@@ -130,7 +130,7 @@ local playerlist1 = Online:CreateDropdown({
    MultiSelection = false,
    Flag = "Dropdown1",
    Callback = function(playerName)
-      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(playerName.Character.HumanoidRootPart.CFrame)
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(tostring(playerName.Character.HumanoidRootPart.CFrame))
    end,
 })
 
