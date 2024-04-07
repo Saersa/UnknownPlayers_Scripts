@@ -142,12 +142,14 @@ local Button = Online:CreateButton({
    Callback = function()
       -- Clear existing options
       for i,v in pairs(playerlist1) do
-         playerlist1:Remove()
+        -- playerlist1:Remove(v)
+         print("Removed "..v)
       end
 
       -- Populate dropdown with player names
-      for _, player in pairs(game.Players:GetPlayers()) do
-         playerlist1:AddOption(player.Name)  -- Use player object as value
+      for _,Value in ipairs(game.Players:GetPlayers()) do
+         playerlist1:AddOption(Value.Name)
+         print(Value.Name)
       end
    end,
 })
