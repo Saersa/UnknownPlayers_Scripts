@@ -163,8 +163,7 @@ local playerlist1 = Online:CreateDropdown({
    end,
 })
 
-
--- Assuming you have a table to track the current options
+--^^^^^^^^^^^^^^^^^^^^^Make this in an player selecter and add teleports etc for buttons so i dont have to make it everytime 
 
 
 local Button = Online:CreateButton({
@@ -201,51 +200,51 @@ local Button = Online:CreateButton({
 local Button = BadPc:CreateButton({
    Name = "Low Graphics",
    Callback = function()
-       workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
-workspace:FindFirstChildOfClass('Terrain').WaterWaveSpeed = 0
-workspace:FindFirstChildOfClass('Terrain').WaterReflectance = 0
-workspace:FindFirstChildOfClass('Terrain').WaterTransparency = 0
-game:GetService("Lighting").GlobalShadows = false
-game:GetService("Lighting").FogEnd = 9e9
-settings().Rendering.QualityLevel = 1
- for i, v in pairs(game:GetDescendants()) do
-    if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or
-              v:IsA("TrussPart") then
-              v.Material = "Plastic"
-              v.Reflectance = 0
-           elseif v:IsA("Decal") then
-              v.Transparency = 1
-           elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
-              v.Lifetime = NumberRange.new(0)
-           elseif v:IsA("Explosion") then
-              v.BlastPressure = 1
-              v.BlastRadius = 1
-           end
-           end
-           for i, v in pairs(game:GetService("Lighting"):GetDescendants()) do
-              if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or
-                 v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
-                 v.Enabled = false
-              end
-           end
-           workspace.DescendantAdded:Connect(function(child)
-              coroutine.wrap(function()
-                 if child:IsA('ForceField') then
-                    game:GetService('RunService').Heartbeat:Wait()
-                    child:Destroy()
-                 elseif child:IsA('Sparkles') then
-                    game:GetService('RunService').Heartbeat:Wait()
-                    child:Destroy()
-                 elseif child:IsA('Smoke') or child:IsA('Fire') then
-                    game:GetService('RunService').Heartbeat:Wait()
-                    child:Destroy()
-                 end
-              end)()
-           end)
+                           workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
+                           workspace:FindFirstChildOfClass('Terrain').WaterWaveSpeed = 0
+                           workspace:FindFirstChildOfClass('Terrain').WaterReflectance = 0
+                           workspace:FindFirstChildOfClass('Terrain').WaterTransparency = 0
+                           game:GetService("Lighting").GlobalShadows = false
+                           game:GetService("Lighting").FogEnd = 9e9
+                           settings().Rendering.QualityLevel = 1
+                           for i, v in pairs(game:GetDescendants()) do
+                              if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or
+                                       v:IsA("TrussPart") then
+                                       v.Material = "Plastic"
+                                       v.Reflectance = 0
+                                    elseif v:IsA("Decal") then
+                                       v.Transparency = 1
+                                    elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                                       v.Lifetime = NumberRange.new(0)
+                                    elseif v:IsA("Explosion") then
+                                       v.BlastPressure = 1
+                                       v.BlastRadius = 1
+                                    end
+                                    end
+                                    for i, v in pairs(game:GetService("Lighting"):GetDescendants()) do
+                                       if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or
+                                          v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
+                                          v.Enabled = false
+                                       end
+                                    end
+                                    workspace.DescendantAdded:Connect(function(child)
+                                       coroutine.wrap(function()
+                                          if child:IsA('ForceField') then
+                                             game:GetService('RunService').Heartbeat:Wait()
+                                             child:Destroy()
+                                          elseif child:IsA('Sparkles') then
+                                             game:GetService('RunService').Heartbeat:Wait()
+                                             child:Destroy()
+                                          elseif child:IsA('Smoke') or child:IsA('Fire') then
+                                             game:GetService('RunService').Heartbeat:Wait()
+                                             child:Destroy()
+                                          end
+                                       end)()
+                                    end)
    end,
 })
 local frames = 0
-local FPS = BadPc:CreateSection(frames.." FPS",false)
+local FPS = BadPc:CreateSection(frames.." FPS")
 
  local Input = BadPc:CreateInput({
     Name = "FPS Amount",
