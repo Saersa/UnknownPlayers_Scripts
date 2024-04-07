@@ -129,44 +129,25 @@ local Dropdown = Online:CreateDropdown({
    MultiSelection = false,
    Flag = "Dropdown1",
    Callback = function(playerName)
-      -- Check if the selected option is not the default option
-      if playerName ~= "Select a player" then
-         -- Find the player with the selected name
-         local playerToTeleport = game.Players:FindFirstChild(playerName)
-         -- Check if the player exists and is in the game
-         if playerToTeleport and playerToTeleport:IsDescendantOf(game.Players) then
-            -- Teleport the local player to the selected player's character
-            game.Players.LocalPlayer.Character:MoveTo(playerToTeleport.Character.HumanoidRootPart.Position)
-         else
-            warn("Player not found or not in the game.")
-         end
-      end
+
+
+      game.Players.LocalPlayer.Character:MoveTo(playerName.Character.HumanoidRootPart.Position)
    end,
 })
 
+
 local function updateDropdownOptions()
    -- Clear existing options
-   Dropdown:ClearOptions()
-   -- Add names of all players to the options
-   for _, player in ipairs(game.Players:GetPlayers()) do
-      Dropdown:AddOption(player.Name)
-   end
+   Dropdown:Refresh({}, "Select a player")
+   
+   -- Get updated list of players
+   local players = getPlayers()
+   
+   -- Add players to the dropdown options
+   Dropdown:Refresh(players)
 end
-
--- Update dropdown options when a player joins
-game.Players.PlayerAdded:Connect(function(player)
-   Dropdown:AddOption(player.Name)
-end)
-
--- Update dropdown options when a player leaves
-game.Players.PlayerRemoving:Connect(function(player)
-   Dropdown:RemoveOption(player.Name)
-end)
-
--- Initial update of options
-updateDropdownOptions()
-
-
+game.Players.PlayerAdded:Connect(updateDropdownOptions())
+game.Players.PlayerRemoving:Connect(updateDropdownOptions())
 
 
 local Button = BadPc:CreateButton({
