@@ -141,15 +141,26 @@ local Button = Online:CreateButton({
    Interact = 'Click',
    Callback = function()
       -- Clear existing options
-      for i,v in pairs(playerlist1) do
+      --local playerlist2 = {}
+     for _,v in pairs(playerlist1) do
          playerlist1:Remove(v)
          print("Removed "..tostring(v))
+         task.wait()
       end
 
       -- Populate dropdown with player names
-      for _,Value in ipairs(game.Players:GetPlayers()) do
-         playerlist1:AddOption(Value.Name)
-         print(Value.Name)
+      for _,Value in pairs(game.Players:GetPlayers()) do
+        -- playerlist1:AddOption(Value.Name)
+        -- print(Value.Name)
+         table.insert(playerlist1, Value.Name)
+         task.wait()
+      end
+     -- task.wait(2)
+     -- print("Printing Users!")
+      --task.wait(1)
+      for i,v in pairs(playerlist1) do
+         print(v)
+         task.wait()
       end
    end,
 })
