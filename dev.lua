@@ -34,10 +34,10 @@ local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI
 local Window = ArrayField:CreateWindow({
     Name = gamename.."|| Dev GUI", -- The ScriptName
     LoadingTitle = gamename.."|| Dev GUI", -- The loading title for the name. Keep it gamename
-    LoadingSubtitle = "by Doran",
+    LoadingSubtitle = "by UnknownPlayer",
     ConfigurationSaving = {
        Enabled = true,
-       FolderName = "Dorans ScriptHub", -- Create a custom folder for your hub/game
+       FolderName = "UnknownPlayers ScriptHub", -- Create a custom folder for your hub/game
        FileName = gamename
     },
     Discord = {
@@ -74,6 +74,61 @@ local Window = ArrayField:CreateWindow({
 
  
  local settings = Window:CreateTab("Settings", 11385220714) -- Title, Image
+
+ local WS = Local:CreateSlider({
+   Name = "Walkspeed",
+   Range = {16, 1000},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 10,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+
+local JP = Local:CreateSlider({
+   Name = "Jumppower",
+   Range = {50, 1000},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 10,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the slider changes
+   -- The variable (Value) is a number which correlates to the value the slider is currently at
+   end,
+})
+
+
+
+local Input = Local:CreateInput({
+   Name = "Walkspeed Specific",
+   PlaceholderText = "Input Placeholder",
+   NumbersOnly = true, -- If the user can only type numbers. Remove or set to false if none.
+   CharacterLimit = 15, --max character limit. Remove or set to false
+   OnEnter = true, -- Will callback only if the user pressed ENTER while being focused on the the box.
+   RemoveTextAfterFocusLost = false, -- Speaks for itself.
+   Callback = function(Text)
+      WS:Set(Text) -- The new slider integer value
+   end,
+})
+
+local Input = Local:CreateInput({
+   Name = "Jumppower Specific",
+   PlaceholderText = "Input Placeholder",
+   NumbersOnly = true, -- If the user can only type numbers. Remove or set to false if none.
+   CharacterLimit = 15, --max character limit. Remove or set to false
+   OnEnter = true, -- Will callback only if the user pressed ENTER while being focused on the the box.
+   RemoveTextAfterFocusLost = false, -- Speaks for itself.
+   Callback = function(Text)
+      JP:Set(Text) -- The new slider integer value
+   end,
+})
+
+
+
 
 
  local Button = settings:CreateButton({
@@ -131,9 +186,9 @@ local Button = Teleportation:CreateButton({
    end,
 })
 
+
+
 local currentOptions = {}
-
-
 local playerlist1 = Online:CreateDropdown({
    Name = "Teleport",
    Options = currentOptions,
@@ -165,14 +220,14 @@ local playerlist1 = Online:CreateDropdown({
 
 --^^^^^^^^^^^^^^^^^^^^^Make this in an player selecter and add teleports etc for buttons so i dont have to make it everytime 
 
-
 local Button = Online:CreateButton({
     Name = "Update playerlist",
     Interact = 'Click',
     Callback = function()
         -- Clear existing options
-        for _, option in ipairs(currentOptions) do
+        for _, option in pairs(currentOptions) do
             playerlist1:Remove(option)
+            task.wait()
         end
 
         -- Wait a bit before adding new options
