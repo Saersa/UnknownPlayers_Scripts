@@ -10,8 +10,9 @@ local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.Place
 local playeramount = 0
 
 local function updatePlayers()
+    local playeramount = 0
     for i,v in pairs(game.Players:GetChildren()) do
-        playeramount = playeramount - i
+        playeramount =- v
         print(v.Name.." is player "..playeramount)
     end
 end
@@ -24,7 +25,10 @@ game.Players.PlayerAdded:Connect(function(plr)
     local thumbSize = Enum.ThumbnailSize.Size420x420
     local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
-    updatePlayers()
+    for i,v in pairs(game.Players:GetChildren()) do
+        playeramount += v
+        print(v.Name.." is player "..playeramount)
+    end
     if isReady then
     game.StarterGui:SetCore("SendNotification", {
         Title = "Player Joined",
@@ -43,7 +47,10 @@ game.Players.PlayerRemoving:Connect(function(plr)
     local thumbSize = Enum.ThumbnailSize.Size420x420
     local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
-    updatePlayers()
+    for i,v in pairs(game.Players:GetChildren()) do
+        playeramount =- v
+        print(v.Name.." is player "..playeramount)
+    end
     if isReady then
     game.StarterGui:SetCore("SendNotification", {
         Title = "Player Left",
