@@ -10,7 +10,7 @@ local gamename = game:GetService("MarketplaceService"):GetProductInfo(game.Place
 local playeramount = 0
 
 for i,v in pairs(game.Players:GetChildren()) do
-    playeramount += 1
+    playeramount = playeramount - i
     print(v.Name.." is player "..playeramount)
 end
 
@@ -22,7 +22,7 @@ game.Players.PlayerAdded:Connect(function(plr)
     local thumbSize = Enum.ThumbnailSize.Size420x420
     local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
-    playeramount += 1
+    playeramount = playeramount + 1
     if isReady then
     game.StarterGui:SetCore("SendNotification", {
         Title = "Player Joined",
@@ -41,7 +41,7 @@ game.Players.PlayerRemoving:Connect(function(plr)
     local thumbSize = Enum.ThumbnailSize.Size420x420
     local content, isReady = game.Players:GetUserThumbnailAsync(userId, thumbType, thumbSize)
 
-    playeramount =- 1
+    playeramount = playeramount - 1
     if isReady then
     game.StarterGui:SetCore("SendNotification", {
         Title = "Player Left",
@@ -99,7 +99,8 @@ local Window = ArrayField:CreateWindow({
 -----------//  Main  \\-----------
 
 local Section = Main:CreateSection("Player Information",true) -- The 2nd argument is to tell if its only a Title and doesnt contain element
- local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.Name)
+ local Label = Main:CreateLabel("Name: "..game.Players.LocalPlayer.name)
+ local Label = Main:CreateLabel("DisplayName: "..game.Players.LocalPlayer.DisplayName)
  local Label = Main:CreateLabel("UserID: "..game.Players.LocalPlayer.UserId)
  local Label = Main:CreateLabel("Country Code: "..game.LocalizationService:GetCountryRegionForPlayerAsync(game.Players.LocalPlayer))
 
@@ -120,7 +121,7 @@ local Button = Main:CreateButton({
         updatePlayercount = true
         for i,v in pairs(game.Players:GetChildren()) do
             task.wait()
-            playeramount += 1
+            playeramount = playeramount + i
             print(v.Name.." is player "..playeramount)
         end
         wait(2)
@@ -386,5 +387,6 @@ ArrayField:LoadConfiguration()
 
 while true do
    wait(1)
+
     plrAmount:Set("Amount of Players: "..playeramount) 
 end
