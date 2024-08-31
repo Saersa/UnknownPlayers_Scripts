@@ -2,7 +2,14 @@
 local url = "https://raw.githubusercontent.com/Saersa/UnknownPlayers_Scripts/main/Scripts"
 
 local games = {
-
+	[920587237] = "Adopt me";
+	[10386702469] = "Roblox but every second you grow";
+	[4282985734] = "Combat Warriors";
+	[142823291] = "Murder Mystery 2";
+	[662417684] = "Lucky Blocks Battleground";
+	[11346342371] = "Making Memes At 3 AM Tycoon";
+	[9834528893] = "+1 Jump Every Second";
+	[8182943961] = "Company Tycoon";
 	
 	
 }
@@ -13,4 +20,3 @@ end
 
 local name = games[game.PlaceId] or games[game.GameId]
 return loadstring(game:HttpGet(url.. "/"..(name or "Universal")..".lua"))()
-print("Loaded"..name)
